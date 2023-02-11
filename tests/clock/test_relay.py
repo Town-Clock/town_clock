@@ -5,13 +5,14 @@ todo: better error handling
 """
 import time
 
-from town_clock.util import *
+from town_clock.util import Mode
 
 
 class Relay:
     """
     Class for relay.
-    todo: remember to order of pulses. Alternating between common and clock pin.
+    todo:
+        remember to order of pulses. Alternating between common and clock pin.
     """
 
     def __init__(
@@ -27,7 +28,7 @@ class Relay:
             time.sleep(0.1)
             self.turn_off()
             return True
-        except Exception as err:
+        except Exception:
             return False
 
     def turn_on(self) -> None:

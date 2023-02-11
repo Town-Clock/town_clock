@@ -1,0 +1,3 @@
+"""
+Calculates sun position.
+"""

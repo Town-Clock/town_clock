@@ -2,12 +2,6 @@ from enum import Enum, auto  # type: ignore
 from typing import Literal  # type: ignore
 
 
-class Diff(Enum):
-    FAST = auto()
-    SLOW = auto()
-    ON_TIME = auto()
-
-
 class Log_Level(Enum):
     """Log Levels:
     CRITICAL: 50
@@ -20,9 +14,11 @@ class Log_Level(Enum):
     """
 
     CRITICAL = 50
+    PULSE = 45
     ERROR = 40
     EXCEPTION = 40
     WARNING = 30
+    SUCCESS = 25
     INFO = 20
     DEBUG = 10
     NOTSET = 0
@@ -53,19 +49,6 @@ class CLOCK(Enum):
     @classmethod
     def values(cls) -> tuple[Literal[0], Literal[1], Literal[2]]:
         return 0, 1, 2
-
-
-# todo: Add logging to exceptions themselves.
-class ClockGroupError(ExceptionGroup):
-    ...
-
-
-class PulseError(Exception):
-    ...
-
-
-class NoValidTimeFromFileError(Exception):
-    ...
 
 
 def convert_position_string_to_number(position_str: str) -> float:

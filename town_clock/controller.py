@@ -6,17 +6,15 @@ from __future__ import annotations
 import os
 import sys
 import time
-from typing import Any  # type: ignore
 
-from icecream import ic
-
-from town_clock.util import *
+from town_clock.util import Mode
 
 
 class Controller:
     """
     Class to control everything.
     """
+
     __singleton: Controller | None = None
 
     def __new__(cls, *args, **kwargs):
@@ -28,26 +26,26 @@ class Controller:
         return cls.__singleton
 
     def __init__(
-            self,
-            clock_pins: tuple[int, int],
-            led_pin: int,
-            common_pin: int,
-            lat: float,
-            long: float,
-            alt: float,
-            mode: Mode = Mode.DEV,
-            ) -> None:
+        self,
+        clock_pins: tuple[int, int],
+        led_pin: int,
+        common_pin: int,
+        lat: float,
+        long: float,
+        alt: float,
+        mode: Mode = Mode.DEV,
+    ) -> None:
         self.pins = {
-            'common_pin': common_pin,
-            'clock_pins': clock_pins,
-            'led_pin'   : led_pin,
-            }
+            "common_pin": common_pin,
+            "clock_pins": clock_pins,
+            "led_pin": led_pin,
+        }
         self.mode: Mode = mode
         self.position: dict[str, float] = {
-            "latitude" : lat,
+            "latitude": lat,
             "longitude": long,
-            "altitude" : alt,
-            }
+            "altitude": alt,
+        }
 
     def run(self) -> None:
         """
@@ -55,8 +53,8 @@ class Controller:
         """
         try:
             while True:
-                ic('Controller.run')
-                ic(self.__dict__)
+                # ic('Controller.run')
+                # ic(self.__dict__)
                 raise KeyboardInterrupt
         except KeyboardInterrupt:
             self.destroy()
@@ -70,7 +68,11 @@ class Controller:
         print("\nbye....")
         sys.exit(0)
 
-    def restart(self, local_time: time.struct_time, force: bool = False) -> None:
+    def restart(
+        self,
+        local_time: time.struct_time,
+        force: bool = False,
+    ) -> None:
         """
         Restart Computer at 2am every day.
         """

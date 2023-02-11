@@ -1,35 +1,16 @@
 """
 Town-clock
+
 Author: Zack Hankin
 Email: zthankin@gmail.com
-
-Config file:
-    location: "../config/config.toml"
-    contents:
-    -----
-    [Location]
-    latitude =  '30.3402S'
-    longitude = '152.7124E'
-    altitude = 741
-
-    [Pins]
-    clock_pins = [24, 25]
-    led_pin = 22
-    common_pin = 23
-    
-    [Mode]
-    mode = 'dev', 'test' or 'active'
-    ------
-
+Version: 1.0.2
 """
 import sys
 
 import tomli
 from pathlib import Path
 
-from icecream import ic
-
-from town_clock.util import *
+from town_clock.util import convert_position_string_to_number, Mode
 from town_clock.controller import Controller
 
 file = Path(__file__, "../../config/config.toml").resolve()
