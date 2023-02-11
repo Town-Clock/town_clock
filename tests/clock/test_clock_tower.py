@@ -1,7 +1,7 @@
 import time
-import datetime  # type:ignore
 
-from town_clock.util import *
+from town_clock.util import Mode, PulseError
+from loguru import logger
 
 
 class ClockTower:
@@ -41,7 +41,7 @@ class ClockTower:
                 time.sleep(1)
 
         except* PulseError as err:
-            ...
+            logger.exception(err)
 
     def check_if_night(self, tm: float) -> None:
         """

@@ -1,5 +1,5 @@
 """
-Town_Clock
+town_clock
 
 Author: Zack Hankin
 email: zthankin@gmail.com
