@@ -3,10 +3,10 @@ clock.py
 
 """
 from __future__ import annotations
+
 import time
-import datetime
 from dataclasses import dataclass, field
-from typing import NoReturn, Protocol
+from typing import Protocol
 
 from loguru import logger
 
@@ -21,80 +21,59 @@ class ClockRelay(Protocol):
         ...
 
 
-def to_from_iso_format(time_stamp: float) -> datetime.datetime:
-    """
-    This function gets around daylight savings issue.
-
-    Args:
-        time_stamp: float: seconds since epoch.
-
-    Returns:
-        datetime.datetime
-    """
-    it = time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(time_stamp))
-    return datetime.datetime.fromisoformat(it)
-
-
 @dataclass
 class Clock:
     """
     Class Clock
 
     params:
-        name: CLOCK
-        time_on_clock: int: seconds since epoch.
-        slow: int: Minutes slow, fast is negative.
+        name (CLOCK): The name of the clock in enum form.
+        relay (ClockRelay): The relay that this Clock controls.
+        time_on_clock (int): minutes past 12 AM/PM (0-719)
+        slow (int): Minutes slow, fast is negative.
+        cutoff (int): Value is used to work out how long the clock will sleep for. Default is 30.
     """
 
     name: CLOCK
     relay: ClockRelay
     time_on_clock: int
-    pulse_frequency: int = 60
     slow: int = field(default=0)
+    cutoff: int = field(default=30)
+    sleep_time: float = field(default=0.5)
 
-    def compare(self, other) -> NoReturn:
-        """todo: Sets the slow parameter"""
-        ...
-
-    @property
-    def mod_time(self) -> int:
+    def compare(self, clock_time: int) -> Clock:
         """
-        Mods the seconds to minutes when storing the time.
-        """
-        return self.time_on_clock
+        Compares the time on the clock with the given time and works out how slow or fast it is.
 
-    @mod_time.setter
-    def mod_time(self, value):
-        self.time_on_clock = self.mod_freq(value, self.pulse_frequency)
-
-    @staticmethod
-    def mod_freq(tm: float | int, freq: float = 60) -> float | int:
-        """
-        Mod Time to show clean minutes
+        The 'self.cutoff' value is used to work out how long the clock will sleep for.
 
         Args:
-            tm (float): Input time in seconds.
-            freq (float, optional): Frequency of pulses. Defaults to 0.
-
-        Raises:
-            ValueError: When a given variable is not a number.
-            ValueError: When freq is less than 0.
+            clock_time: int: Time.clock_time, minutes after 12 AM/PM.
 
         Returns:
-            float: Seconds rounded to the nearest minute. Unless freq is set.
+            self
         """
-        if type(tm) not in (float, int):
-            raise TypeError("Not a Number.")
 
-        if freq <= 0:
-            logger.error("Freq must be greater than 0")
-            raise ValueError("Freq must be greater that 0.")
-        tm_mod = tm % freq
+        difference: int = clock_time - self.time_on_clock
 
-        if tm_mod >= freq / 2:
-            return tm + (freq - tm_mod)
-        else:
-            return tm - tm_mod
+        while difference >= 720:
+            logger.error(f"Clock {self.name.name} Difference: {difference}")
+            difference -= 720
+        while difference <= -720:
+            logger.error(f"Clock {self.name.name} Difference: {difference}")
+            difference += 720
+
+        if difference < 0:  # Difference is negative.
+            difference += 720
+
+        if (720 - self.cutoff) <= difference < 720:
+            difference -= 720
+
+        if difference == 720:
+            difference = 0
+
+        self.slow = difference
+        return self
 
     def pulse(self, num_pulses: int = 1) -> Clock:
         """Pulse the clock"""
@@ -102,5 +81,5 @@ class Clock:
             self.relay.pulse()
             self.slow -= 1
             if num_pulses > 1:
-                time.sleep(0.5)
+                time.sleep(self.sleep_time)
         return self
