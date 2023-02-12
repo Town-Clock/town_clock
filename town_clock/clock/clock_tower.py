@@ -23,11 +23,13 @@ class Pulses:
     one: int
     two: int
 
-    def __eq__(self, other: Pulses | Sequence) -> bool:
+    def __eq__(self, other: object) -> bool:
         if isinstance(other, Pulses):
             return self == other
-        else:
+        elif isinstance(other, Sequence):
             return (self.one == other[0]) and (self.two == other[1])
+        else:
+            raise TypeError("Not Pulses or sequence for equality.")
 
 
 class LEDRelay(Protocol):
@@ -64,7 +66,8 @@ class ClockTower:
 
     def pulse(self) -> None:
         """
-        Handles both slow and fast cases using the max of "Clock.slow" and 0. Fast is < 0.
+        Handles both slow and fast cases using the max of "Clock.slow"
+        and 0. Fast is < 0.
         """
         try:
             while (clock_pulses := self.slow) != [0, 0]:
@@ -91,5 +94,5 @@ class ClockTower:
         """
         Todo: change from int to dict of the time of day list.
         """
-        if self.time.is_night:
+        if self.time.is_night():
             raise NotImplementedError

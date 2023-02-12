@@ -1,4 +1,4 @@
-from datetime import  datetime
+from datetime import datetime
 
 class TimezoneFinder:
     def timezone_at(self, *, lng: float, lat: float) -> str: ...

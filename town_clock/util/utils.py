@@ -1,5 +1,5 @@
-from enum import Enum, auto  # type: ignore
-from typing import Literal  # type: ignore
+from enum import Enum
+from typing import Literal
 
 
 class Log_Level(Enum):

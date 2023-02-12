@@ -11,4 +11,11 @@ from .clock import Clock
 from .clock_tower import ClockTower, Pulses
 from .relay import ClockRelay, LEDRelay
 
-__all__: list[str] = ["Time", "Clock", "ClockTower", "ClockRelay", "LEDRelay", "Pulses"]
+__all__: list[str] = [
+    "Time",
+    "Clock",
+    "ClockTower",
+    "ClockRelay",
+    "LEDRelay",
+    "Pulses",
+]
