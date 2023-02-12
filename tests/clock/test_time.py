@@ -72,14 +72,14 @@ def test_time_clock_time_equals_zero(test_input, expected) -> None:
 @pytest.mark.parametrize(
     ("hour", "minute", "expected"),
     (
-        (1, 0, 60),
-        (2, 0, 120),
-        (13, 0, 60),
-        (14, 0, 120),
-        (11, 0, 660),
-        (0, 45, 45),
-        (23, 59, 719),
-        (11, 59, 719),
+            (1, 0, 60),
+            (2, 0, 120),
+            (13, 0, 60),
+            (14, 0, 120),
+            (11, 0, 660),
+            (0, 45, 45),
+            (23, 59, 719),
+            (11, 59, 719),
     ),
 )
 def test_time_clock_time_equals(hour, minute, expected) -> None:
@@ -91,11 +91,11 @@ def test_time_clock_time_equals(hour, minute, expected) -> None:
 @pytest.mark.parametrize(
     ("second", "microsecond", "expected"),
     (
-        (0, 0, True),
-        (0, 999999, True),
-        (1, 0, False),
-        (59, 999999, False),
-        (30, 8319, False),
+            (0, 0, True),
+            (0, 999999, True),
+            (1, 0, False),
+            (59, 999999, False),
+            (30, 8319, False),
     ),
 )
 def test_time_is_on_minute(second, microsecond, expected) -> None:
