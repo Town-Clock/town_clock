@@ -6,12 +6,12 @@ Email: zthankin@gmail.com
 Version: 1.0.2
 """
 import sys
-
-import tomli
 from pathlib import Path
 
-from town_clock.util import convert_position_string_to_number, Mode
+import tomli
+
 from town_clock.controller import Controller
+from town_clock.util import convert_position_string_to_number, Mode
 
 file = Path(__file__, "../../config/config.toml").resolve()
 
@@ -39,7 +39,7 @@ CONTROLLER = Controller(
     long=longitude,
     alt=altitude,
     mode=mode,
-    )
+)
 
 
 def main():
@@ -49,5 +49,5 @@ def main():
     CONTROLLER.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

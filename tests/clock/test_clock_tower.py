@@ -1,50 +1,74 @@
-import time
+"""
+Test clock_tower.py
+"""
+from __future__ import annotations
 
-from town_clock.util import Mode, PulseError
-from loguru import logger
+import pytest
+from icecream import icecream
+
+from town_clock import Clock, ClockTower, Time
+from town_clock.util import CLOCK, Mode
 
 
-class ClockTower:
-    """
-    Todo: needs a rename especially the file
-    """
-
-    def __init__(
-            self,
-            clock_pins: tuple[int, int],
-            led_pin: int,
-            common_pin: int,
-            position: dict[str, float],
-            mode: Mode = Mode.ACTIVE,
-            ) -> None:
-        self.mode = mode
-        self.pins = {"Clock": clock_pins, "LED": led_pin}
-
-    def pulse(self, clock_pulses: list[int] | None = None) -> None:
-        """
-        todo: Keep logic for pulses.
-        """
-        if clock_pulses is None:
-            clock_pulses = [0, 0]
-        try:
-            while clock_pulses != [0, 0]:
-                if (clock_pulses[0] > 0) and (clock_pulses[1] > 0):
-                    clock_pulses[0] -= 1
-                    clock_pulses[1] -= 1
-
-                elif clock_pulses[1] == 0:
-                    clock_pulses[0] -= 1
-
-                elif clock_pulses[0] == 0:
-                    clock_pulses[1] -= 1
-
-                time.sleep(1)
-
-        except* PulseError as err:
-            logger.exception(err)
-
-    def check_if_night(self, tm: float) -> None:
-        """
-        Todo: change from int to dict
-        """
+class MOCK_LEDRELAY:
+    def turn_on(self) -> MOCK_LEDRELAY:
         ...
+
+    def turn_off(self) -> MOCK_LEDRELAY:
+        ...
+
+
+class MOCK_ClockRelay:
+    count: int = 0
+
+    def pulse(self):
+        self.count += 1
+        icecream.ic()
+        return self
+
+
+MOCK_TIME = Time()
+MOCK_POS: dict[str, float] = ...
+
+ONE = CLOCK.ONE
+TWO = CLOCK.TWO
+
+MOCK_CLOCK_DICT: dict[CLOCK, Clock] = {
+    ONE: Clock(ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+    TWO: Clock(TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+}
+
+
+@pytest.fixture
+def default_town_clock() -> ClockTower:
+    return ClockTower(
+        running=True,
+        time=MOCK_TIME,
+        mode=Mode.TEST,
+        led=MOCK_LEDRELAY,
+        clock=MOCK_CLOCK_DICT,
+        position=MOCK_POS,
+        pulse_interval=0.1,
+    )
+
+
+def test_clock_tower_instantiation(default_town_clock: ClockTower) -> None:
+    assert isinstance(default_town_clock, ClockTower)
+
+
+def test_clock_tower_slow_property(default_town_clock: ClockTower) -> None:
+    default_town_clock.clock[ONE].slow = 5
+    default_town_clock.clock[TWO].slow = 5
+    assert default_town_clock.slow == [5, 5]
+    default_town_clock.clock[ONE].pulse()
+    default_town_clock.clock[TWO].pulse()
+    assert default_town_clock.slow == [4, 4]
+
+
+def test_clock_tower_pulse(default_town_clock: ClockTower) -> None:
+    default_town_clock.clock[ONE].slow = 5
+    default_town_clock.clock[TWO].slow = 5
+    default_town_clock.pulse()
+    relay_clock_1 = default_town_clock.clock[ONE].relay.count
+    relay_clock_2 = default_town_clock.clock[TWO].relay.count
+    assert relay_clock_1 == relay_clock_2 == 5
