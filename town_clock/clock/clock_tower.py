@@ -9,7 +9,7 @@ from typing import Protocol, Sequence
 
 from loguru import logger
 
-from town_clock import Clock, Time
+from town_clock.clock import Clock, Time
 from town_clock.util import CLOCK, Mode
 
 ONE = CLOCK.ONE
@@ -20,16 +20,51 @@ TWO = CLOCK.TWO
 class Pulses:
     """Object to control the Pulse amount"""
 
-    one: int
-    two: int
+    __one: int
+    __two: int
 
-    def __eq__(self, other: object) -> bool:
-        if isinstance(other, Pulses):
-            return self == other
-        elif isinstance(other, Sequence):
-            return (self.one == other[0]) and (self.two == other[1])
+    def __post_init__(self):
+        self.one = self.__one
+        self.two = self.__two
+
+    @property
+    def one(self) -> int:
+        """
+        Pulses needed for clock one.
+
+        Returns:
+            Number of pulses required for clock one.
+        """
+        return self.__one
+
+    @one.setter
+    def one(self, value):
+        self.__one = value if value > 0 else 0
+
+    @property
+    def two(self):
+        """
+        Pulses needed for clock two.
+
+        Returns:
+            Number of pulses required for clock two.
+        """
+        return self.__two
+
+    @two.setter
+    def two(self, value):
+        self.__two = value if value > 0 else 0
+
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, Pulses):
+            return self == o
+        elif isinstance(o, Sequence):
+            return (self.one == o[0]) and (self.two == o[1])
         else:
-            raise TypeError("Not Pulses or sequence for equality.")
+            raise TypeError("Other not Pulses or a sequence for equality.")
+
+    def __repr__(self):
+        return f"Pulses({self.one, self.two})"
 
 
 class LEDRelay(Protocol):
@@ -58,7 +93,9 @@ class ClockTower:
 
     @property
     def slow(self):
-        return Pulses(*(clock.slow for clock in self.clock.values()))
+        return Pulses(
+            *(clock.slow for clock in self.clock.values())
+        )
 
     @property
     def is_night(self):
@@ -69,20 +106,22 @@ class ClockTower:
         Handles both slow and fast cases using the max of "Clock.slow"
         and 0. Fast is < 0.
         """
+        count = 0
         try:
-            while (clock_pulses := self.slow) != [0, 0]:
-                print(clock_pulses)
-                if (clock_pulses.one > 0) and (clock_pulses.two > 0):
-                    self.clock[ONE].pulse()
-                    self.clock[TWO].pulse()
+            while (clock_pulses := self.slow) != [0, 0] or count > 60:
+    print(clock_pulses)
+    if (clock_pulses.one > 0) and (clock_pulses.two > 0):
+        self.clock[ONE].pulse()
+        self.clock[TWO].pulse()
 
-                elif clock_pulses.two == 0:
-                    self.clock[ONE].pulse(clock_pulses.one)
+    elif clock_pulses.two == 0:
+        self.clock[ONE].pulse(clock_pulses.one)
 
-                elif clock_pulses.one == 0:
-                    self.clock[TWO].pulse(clock_pulses.two)
+    elif clock_pulses.one == 0:
+        self.clock[TWO].pulse(clock_pulses.two)
 
                 sleep(self.pulse_interval)
+                count += 1
         except Exception as err:
             logger.exception(err)
 
