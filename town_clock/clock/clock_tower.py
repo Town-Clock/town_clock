@@ -107,18 +107,18 @@ class ClockTower:
         count = 0
         try:
             while (clock_pulses := self.slow) != [0, 0] or count > 60:
-    if (clock_pulses.one > 0) and (clock_pulses.two > 0):
-        self.clock[ONE].pulse()
-        self.clock[TWO].pulse()
+                if (clock_pulses.one > 0) and (clock_pulses.two > 0):
+                    self.clock[ONE].pulse()
+                    self.clock[TWO].pulse()
 
-    elif clock_pulses.two == 0:
-        self.clock[ONE].pulse(clock_pulses.one)
+                elif clock_pulses.two == 0:
+                    self.clock[ONE].pulse(clock_pulses.one)
 
-    elif clock_pulses.one == 0:
-        self.clock[TWO].pulse(clock_pulses.two)
+                elif clock_pulses.one == 0:
+                    self.clock[TWO].pulse(clock_pulses.two)
 
-    sleep(self.pulse_interval)
-    count += 1
+                sleep(self.pulse_interval)
+                count += 1
         except Exception as err:
             logger.exception(err)
 
