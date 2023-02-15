@@ -1,12 +1,8 @@
 name: Tests
 
 on:
-  push:
-    branches:
-      - main
-  pull requests:
-    branches:
-      - '*'
+  - push
+  - pull requests
 
 jobs:
   test:
