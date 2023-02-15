@@ -25,4 +25,4 @@ jobs:
           poetry install --with=dev,docs
           pip install tox tox-gh-actions
       - name: Test with pytest
-        run: pytest tests
+        run: python -m pytest tests
