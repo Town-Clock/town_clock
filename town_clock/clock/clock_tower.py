@@ -93,9 +93,7 @@ class ClockTower:
 
     @property
     def slow(self):
-        return Pulses(
-            *(clock.slow for clock in self.clock.values())
-        )
+        return Pulses(*(clock.slow for clock in self.clock.values()))
 
     @property
     def is_night(self):
@@ -109,7 +107,6 @@ class ClockTower:
         count = 0
         try:
             while (clock_pulses := self.slow) != [0, 0] or count > 60:
-    print(clock_pulses)
     if (clock_pulses.one > 0) and (clock_pulses.two > 0):
         self.clock[ONE].pulse()
         self.clock[TWO].pulse()
@@ -120,8 +117,8 @@ class ClockTower:
     elif clock_pulses.one == 0:
         self.clock[TWO].pulse(clock_pulses.two)
 
-                sleep(self.pulse_interval)
-                count += 1
+    sleep(self.pulse_interval)
+    count += 1
         except Exception as err:
             logger.exception(err)
 

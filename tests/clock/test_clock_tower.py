@@ -26,34 +26,33 @@ class MOCK_ClockRelay:
         icecream.ic()
         return self
 
-        MOCK_TIME = Time()
-        MOCK_POS: dict[str, float] = ...
 
-        ONE = CLOCK.ONE
-        TWO = CLOCK.TWO
+MOCK_TIME = Time()
+MOCK_POS: dict[str, float] = ...
 
-        @pytest.fixture
-        def mock_clock_dict() -> dict[CLOCK, Clock]:
-            return {
-                ONE: Clock(
-                    ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01
-                ),
-                TWO: Clock(
-                    TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01
-                ),
-            }
+ONE = CLOCK.ONE
+TWO = CLOCK.TWO
 
-        @pytest.fixture
-        def default_town_clock(mock_clock_dict) -> ClockTower:
-            return ClockTower(
-                running=True,
-                time=MOCK_TIME,
-                mode=Mode.TEST,
-                led=MOCK_LEDRELAY,
-                clock=mock_clock_dict,
-                position=MOCK_POS,
-                pulse_interval=0.1,
-            )
+
+@pytest.fixture
+def mock_clock_dict() -> dict[CLOCK, Clock]:
+    return {
+        ONE: Clock(ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+        TWO: Clock(TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+    }
+
+
+@pytest.fixture
+def default_town_clock(mock_clock_dict) -> ClockTower:
+    return ClockTower(
+        running=True,
+        time=MOCK_TIME,
+        mode=Mode.TEST,
+        led=MOCK_LEDRELAY,
+        clock=mock_clock_dict,
+        position=MOCK_POS,
+        pulse_interval=0.1,
+    )
 
 
 def test_clock_tower_instantiation(default_town_clock: ClockTower) -> None:
