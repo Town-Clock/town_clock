@@ -4,17 +4,16 @@ Test clock_tower.py
 from __future__ import annotations
 
 import pytest
-from icecream import icecream
 
 from town_clock import Clock, ClockTower, Time
 from town_clock.util import CLOCK, Mode
 
 
 class MOCK_LEDRELAY:
-    def turn_on(self) -> MOCK_LEDRELAY:
+    def turn_on(self):
         ...
 
-    def turn_off(self) -> MOCK_LEDRELAY:
+    def turn_off(self):
         ...
 
 
@@ -23,12 +22,11 @@ class MOCK_ClockRelay:
 
     def pulse(self):
         self.count += 1
-        icecream.ic()
         return self
 
 
 MOCK_TIME = Time()
-MOCK_POS: dict[str, float] = ...
+MOCK_POS: dict[str, float] = dict()
 
 ONE = CLOCK.ONE
 TWO = CLOCK.TWO
@@ -37,8 +35,12 @@ TWO = CLOCK.TWO
 @pytest.fixture
 def mock_clock_dict() -> dict[CLOCK, Clock]:
     return {
-        ONE: Clock(ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
-        TWO: Clock(TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+        ONE: Clock(
+            ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01
+        ),
+        TWO: Clock(
+            TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01
+        ),
     }
 
 
@@ -48,7 +50,7 @@ def default_town_clock(mock_clock_dict) -> ClockTower:
         running=True,
         time=MOCK_TIME,
         mode=Mode.TEST,
-        led=MOCK_LEDRELAY,
+        led=MOCK_LEDRELAY(),  # type: ignore
         clock=mock_clock_dict,
         position=MOCK_POS,
         pulse_interval=0.1,
@@ -82,12 +84,14 @@ def test_clock_tower_slow_property(
         (0, -1, [0, 0]),
     ),
 )
-def test_clock_tower_pulse(c1, c2, expected, default_town_clock: ClockTower) -> None:
+def test_clock_tower_pulse(
+    c1, c2, expected, default_town_clock: ClockTower
+) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
     default_town_clock.pulse()
-    relay_clock_1 = default_town_clock.clock[ONE].relay.count
-    relay_clock_2 = default_town_clock.clock[TWO].relay.count
+    relay_clock_1 = default_town_clock.clock[ONE].relay.count  # type: ignore
+    relay_clock_2 = default_town_clock.clock[TWO].relay.count  # type: ignore
     assert [relay_clock_1, relay_clock_2] == expected
 
 
