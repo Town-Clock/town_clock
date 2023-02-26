@@ -3,6 +3,7 @@ relay.py
 
 todo: better error handling
 """
+from __future__ import annotations
 import time
 
 from town_clock.util import Mode, CLOCK

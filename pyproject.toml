@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "town-clock"
-version = "1.0.2"
+version = "1.1.0"
 description = "An application that runs a raspberry pi based town clock."
 authors = ["Zack Hankin <zthankin@gmail.com>"]
 license = "MIT"
@@ -15,27 +15,46 @@ skyfield = "^1.45"
 pytz = "^2022.7.1"
 timezonefinder = "^6.1.9"
 loguru = "^0.6.0"
-types-pytz = "^2022.7.1.0"
-types-cffi = "^1.15.1.5"
 pendulum = "^2.1.2"
-pytest = "^7.2.1"
+
+# Extras for docs
+sphinx = { version = "^5", optional = true }
+myst-parser = { version = "^0.18.1", optional = true }
+sphinx-rtd-theme = { version = "^1", optional = true }
 
 [tool.poetry.group.dev]
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.2.1"
-black = "^22.12.0"
 coverage = "^7.1.0"
+pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
+pytest-sugar = "^0.9.6"
 mypy = "^1.0.0"
+types-pytz = "^2022.7.1.0"
+types-cffi = "^1.15.1.5"
 flake8 = "^6.0.0"
+tox = "^4.4.5"
 
 [tool.poetry.group.docs]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-mkdocs = "^1.4.2"
+sphinx = "^5"
+myst-parser = "^0.18.1"
+sphinx-rtd-theme = "^1"
+
+[tool.poetry.extras]
+docs = ['sphinx', 'myst-parser', 'sphinx-rtd-theme']
+
+[tool.mypy]
+mypy_path = '$MYPY_CONFIG_FILE_DIR'
+files = '$MYPY_CONFIG_FILE_DIR/town_clock'
+explicit_package_bases = false
+ignore_missing_imports = true
+exclude = [
+    "docs/",
+]
 
 [build-system]
 requires = ["poetry-core"]

@@ -9,10 +9,6 @@ from town_clock.clock.clock import ClockRelay
 from town_clock.util import CLOCK
 
 
-# logger.remove(0)
-# logger.add(sys.stdout, level="INFO")
-
-
 class MockRelay:
     pulse_count = 0
 
@@ -51,17 +47,17 @@ def test_clock_pulse_error(default_clock):
 @pytest.mark.parametrize(
     "clock_time, time_on_clock, expected",
     (
-            (0, 0, 0),
-            (1, 0, 1),
-            (700, 0, -20),
-            (1440, 0, 0),
-            (0, 1440, 0),
-            (-1440, 1440, 0),
-            (10, 0, 10),
-            (0, 10, -10),
-            (100, 130, -30),
-            (0, 719, 1),
-            (30, 690, 60),
+        (0, 0, 0),
+        (1, 0, 1),
+        (700, 0, -20),
+        (1440, 0, 0),
+        (0, 1440, 0),
+        (-1440, 1440, 0),
+        (10, 0, 10),
+        (0, 10, -10),
+        (100, 130, -30),
+        (0, 719, 1),
+        (30, 690, 60),
     ),
 )
 def test_clock_compare(default_clock, clock_time, time_on_clock, expected):

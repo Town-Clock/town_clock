@@ -12,10 +12,17 @@ from pendulum import DateTime
 
 from town_clock.clock import Time
 
-TZ = pendulum.timezone("Australia/Sydney")
+TZ = pendulum.tz.timezone("Australia/Sydney")
 
 TEST_DEFAULT_TIME: DateTime = pendulum.DateTime(
-    year=2013, month=3, day=31, hour=12, minute=0, second=0, microsecond=0, tzinfo=TZ
+    year=2013,
+    month=3,
+    day=31,
+    hour=12,
+    minute=0,
+    second=0,
+    microsecond=0,
+    tzinfo=TZ,
 )
 
 MIDNIGHT_MIDDAY: list[DateTime] = [
@@ -30,7 +37,14 @@ MIDNIGHT_MIDDAY: list[DateTime] = [
         tzinfo=TZ,
     ),
     pendulum.DateTime(
-        year=2013, month=3, day=31, hour=0, minute=0, second=0, microsecond=0, tzinfo=TZ
+        year=2013,
+        month=3,
+        day=31,
+        hour=0,
+        minute=0,
+        second=0,
+        microsecond=0,
+        tzinfo=TZ,
     ),
 ]
 
@@ -62,7 +76,10 @@ def test_time_instantiation() -> None:
     assert isinstance(t, Time)
 
 
-@pytest.mark.parametrize(("test_input", "expected"), [(t, 0) for t in MIDNIGHT_MIDDAY])
+@pytest.mark.parametrize(
+    ("test_input", "expected"),
+    [(t, 0) for t in MIDNIGHT_MIDDAY],
+)
 def test_time_clock_time_equals_zero(test_input, expected) -> None:
     t = Time(test_input)
     t.set_clock_time(t.now)
@@ -72,14 +89,14 @@ def test_time_clock_time_equals_zero(test_input, expected) -> None:
 @pytest.mark.parametrize(
     ("hour", "minute", "expected"),
     (
-            (1, 0, 60),
-            (2, 0, 120),
-            (13, 0, 60),
-            (14, 0, 120),
-            (11, 0, 660),
-            (0, 45, 45),
-            (23, 59, 719),
-            (11, 59, 719),
+        (1, 0, 60),
+        (2, 0, 120),
+        (13, 0, 60),
+        (14, 0, 120),
+        (11, 0, 660),
+        (0, 45, 45),
+        (23, 59, 719),
+        (11, 59, 719),
     ),
 )
 def test_time_clock_time_equals(hour, minute, expected) -> None:
@@ -91,15 +108,24 @@ def test_time_clock_time_equals(hour, minute, expected) -> None:
 @pytest.mark.parametrize(
     ("second", "microsecond", "expected"),
     (
-            (0, 0, True),
-            (0, 999999, True),
-            (1, 0, False),
-            (59, 999999, False),
-            (30, 8319, False),
+        (0, 0, True),
+        (0, 999999, True),
+        (1, 0, False),
+        (59, 999999, False),
+        (30, 8319, False),
     ),
 )
 def test_time_is_on_minute(second, microsecond, expected) -> None:
-    temp_time = pendulum.DateTime(2013, 3, 31, 0, 0, second, microsecond, tzinfo=TZ)
+    temp_time = pendulum.DateTime(
+        2013,
+        3,
+        31,
+        0,
+        0,
+        second,
+        microsecond,
+        tzinfo=TZ,
+    )
     t = Time(TEST_DEFAULT_TIME)
     on_minute = t(temp_time)
     assert t.now == temp_time

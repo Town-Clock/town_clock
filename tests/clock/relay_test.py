@@ -15,9 +15,7 @@ class Relay:
         remember to order of pulses. Alternating between common and clock pin.
     """
 
-    def __init__(
-            self, pin: int, name: str, mode: Mode = Mode.TEST
-            ) -> None:
+    def __init__(self, pin: int, name: str, mode: Mode = Mode.TEST) -> None:
         self.mode = mode
         self.pin = pin
         self.name = name

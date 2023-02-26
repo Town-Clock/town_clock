@@ -31,7 +31,8 @@ class Clock:
         relay (ClockRelay): The relay that this Clock controls.
         time_on_clock (int): minutes past 12 AM/PM (0-719)
         slow (int): Minutes slow, fast is negative.
-        cutoff (int): Value is used to work out how long the clock will sleep for. Default is 30.
+        cutoff (int): Value is used to work out how long the
+                      clock will sleep for. Default is 30.
     """
 
     name: CLOCK
@@ -43,9 +44,11 @@ class Clock:
 
     def compare(self, clock_time: int) -> Clock:
         """
-        Compares the time on the clock with the given time and works out how slow or fast it is.
+        Compares the time on the clock with the given time and
+        works out how slow or fast it is.
 
-        The 'self.cutoff' value is used to work out how long the clock will sleep for.
+        The 'self.cutoff' value is used to work out
+        how long the clock will sleep for.
 
         Args:
             clock_time: int: Time.clock_time, minutes after 12 AM/PM.
@@ -77,7 +80,12 @@ class Clock:
 
     def pulse(self, num_pulses: int = 1) -> Clock:
         """Pulse the clock"""
-        for _ in range(num_pulses):
+        if not isinstance(num_pulses, int):
+            raise TypeError(
+                f"Clock pulse args must be of type int, got: "
+                f"{type(num_pulses).__name__}"
+            )
+        for _ in range(int(num_pulses)):
             self.relay.pulse()
             self.slow -= 1
             if num_pulses > 1:

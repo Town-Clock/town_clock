@@ -14,7 +14,7 @@ from typing import Optional
 import pendulum
 from loguru import logger
 from pendulum import DateTime
-from pendulum.tz.zoneinfo import Timezone
+from pendulum.tz.timezone import Timezone
 
 
 @dataclass
@@ -22,12 +22,13 @@ class Time:
     """
     now: pendulum.DateTime:
     clock_time: int: minutes from 12 AM/PM
-    timezone: Timezone | str: Timezone of the clock. Default is "Australia/Sydney".
+    timezone: Timezone | str: Timezone of the clock.
+    Default is "Australia/Sydney".
     """
 
     now: DateTime = field(default=pendulum.from_timestamp(0))
     clock_time: int = field(default=-1)
-    timezone: Timezone | str = "Australia/Sydney"
+    timezone: Optional[Timezone | str] = "Australia/Sydney"
 
     def __post_init__(self):
         """
@@ -51,7 +52,8 @@ class Time:
 
     def set_clock_time(self, tm: int | DateTime) -> Time:
         """
-        Converts from time | DateTime to minutes since 12 AM/PM and sets clock_time.
+        Converts from time | DateTime to minutes since 12 AM/PM
+        and sets clock_time.
         Always rounds down to the nearest minute.
 
         Args:
@@ -83,7 +85,7 @@ class Time:
     def __call__(self, time: Optional[DateTime] = None) -> bool:
         """
         Sets now and sets clock_time if on the minute.
-        todo: maybe remove optional time.
+
         Returns:
             Returns True if on the minute.
         """
@@ -94,6 +96,8 @@ class Time:
         else:
             raise TypeError(f"Unexpected type for time: {type(time).__name__}")
         if changed_time := self.is_on_minute(self.now):
+            self.set_clock_time(self.now)
+        elif time is not None:
             self.set_clock_time(self.now)
         return changed_time
 
@@ -110,11 +114,12 @@ class Time:
             return False
 
     def add_minute(self, minute: int = 1) -> Time:
-        self(self.now.add(minutes=1))
+        self(self.now.add(minutes=minute))
+        return self
 
     def is_night(self) -> bool:
         """Is it nighttime?"""
-        return NotImplemented
+        raise NotImplementedError
 
     def log_time(self) -> str:
-        return NotImplemented
+        raise NotImplementedError
