@@ -70,7 +70,9 @@ class ClockTower:
                 sleep(self.pulse_interval)
                 count += 1
                 if count > max_count:
-                    raise RuntimeError(f"Pulse count exceeded limit: {count}, {clock_pulses}")
+                    raise RuntimeError(
+                        f"Pulse count exceeded limit: {count}, {clock_pulses}"
+                    )
         except Exception as err:
             logger.exception(err)
 

@@ -76,9 +76,7 @@ def test_time_instantiation() -> None:
     assert isinstance(t, Time)
 
 
-@pytest.mark.parametrize(
-    ("test_input", "expected"), [(t, 0) for t in MIDNIGHT_MIDDAY]
-)
+@pytest.mark.parametrize(("test_input", "expected"), [(t, 0) for t in MIDNIGHT_MIDDAY])
 def test_time_clock_time_equals_zero(test_input, expected) -> None:
     t = Time(test_input)
     t.set_clock_time(t.now)
@@ -115,9 +113,7 @@ def test_time_clock_time_equals(hour, minute, expected) -> None:
     ),
 )
 def test_time_is_on_minute(second, microsecond, expected) -> None:
-    temp_time = pendulum.DateTime(
-        2013, 3, 31, 0, 0, second, microsecond, tzinfo=TZ
-    )
+    temp_time = pendulum.DateTime(2013, 3, 31, 0, 0, second, microsecond, tzinfo=TZ)
     t = Time(TEST_DEFAULT_TIME)
     on_minute = t(temp_time)
     assert t.now == temp_time
