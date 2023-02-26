@@ -49,7 +49,7 @@ docs = ['sphinx', 'myst-parser', 'sphinx-rtd-theme']
 
 [tool.mypy]
 mypy_path = '$MYPY_CONFIG_FILE_DIR'
-files = '$MYPY_CONFIG_FILE_DIR/template_package'
+files = '$MYPY_CONFIG_FILE_DIR/town_clock'
 explicit_package_bases = false
 ignore_missing_imports = true
 exclude = [
