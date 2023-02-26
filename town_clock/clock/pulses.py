@@ -41,6 +41,7 @@ class GreaterThanZero:
 
 class Pulses:
     """Object to control the Pulse amount"""
+
     one = GreaterThanZero()
     two = GreaterThanZero()
 

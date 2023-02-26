@@ -37,12 +37,8 @@ TWO = CLOCK.TWO
 @pytest.fixture
 def mock_clock_dict() -> dict[CLOCK, Clock]:
     return {
-        ONE: Clock(
-            ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01
-        ),
-        TWO: Clock(
-            TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01
-        ),
+        ONE: Clock(ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+        TWO: Clock(TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
     }
 
 
@@ -68,10 +64,10 @@ def test_clock_tower_instantiation(default_town_clock: ClockTower) -> None:
     ((5, 5, [5, 5]), (1, 5, [1, 5]), (0, -1, [0, 0])),
 )
 def test_clock_tower_slow_property(
-        c1: int,
-        c2: int,
-        expected,
-        default_town_clock: ClockTower,
+    c1: int,
+    c2: int,
+    expected,
+    default_town_clock: ClockTower,
 ) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
@@ -81,14 +77,12 @@ def test_clock_tower_slow_property(
 @pytest.mark.parametrize(
     "c1, c2, expected",
     (
-            (5, 5, [5, 5]),
-            (1, 5, [1, 5]),
-            (0, -1, [0, 0]),
+        (5, 5, [5, 5]),
+        (1, 5, [1, 5]),
+        (0, -1, [0, 0]),
     ),
 )
-def test_clock_tower_pulse(
-        c1, c2, expected, default_town_clock: ClockTower
-) -> None:
+def test_clock_tower_pulse(c1, c2, expected, default_town_clock: ClockTower) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
     default_town_clock.pulse()
