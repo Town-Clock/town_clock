@@ -4,8 +4,9 @@ Test clock_tower.py
 from __future__ import annotations
 
 import pytest
+from icecream import ic
 
-from town_clock import Clock, ClockTower, Time
+from town_clock import Clock, ClockTower, Time, Pulses
 from town_clock.util import CLOCK, Mode
 
 
@@ -22,6 +23,7 @@ class MOCK_ClockRelay:
 
     def pulse(self):
         self.count += 1
+        ic(self.count)
         return self
 
 
@@ -66,10 +68,10 @@ def test_clock_tower_instantiation(default_town_clock: ClockTower) -> None:
     ((5, 5, [5, 5]), (1, 5, [1, 5]), (0, -1, [0, 0])),
 )
 def test_clock_tower_slow_property(
-    c1: int,
-    c2: int,
-    expected,
-    default_town_clock: ClockTower,
+        c1: int,
+        c2: int,
+        expected,
+        default_town_clock: ClockTower,
 ) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
@@ -79,13 +81,13 @@ def test_clock_tower_slow_property(
 @pytest.mark.parametrize(
     "c1, c2, expected",
     (
-        (5, 5, [5, 5]),
-        (1, 5, [1, 5]),
-        (0, -1, [0, 0]),
+            (5, 5, [5, 5]),
+            (1, 5, [1, 5]),
+            (0, -1, [0, 0]),
     ),
 )
 def test_clock_tower_pulse(
-    c1, c2, expected, default_town_clock: ClockTower
+        c1, c2, expected, default_town_clock: ClockTower
 ) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
@@ -93,7 +95,3 @@ def test_clock_tower_pulse(
     relay_clock_1 = default_town_clock.clock[ONE].relay.count  # type: ignore
     relay_clock_2 = default_town_clock.clock[TWO].relay.count  # type: ignore
     assert [relay_clock_1, relay_clock_2] == expected
-
-
-def test_clock_tower():
-    ...

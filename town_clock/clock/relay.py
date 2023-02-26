@@ -3,6 +3,7 @@ relay.py
 
 todo: better error handling
 """
+from __future__ import annotations
 import time
 
 from town_clock.util import Mode, CLOCK
@@ -16,7 +17,7 @@ class Relay:
         remember to order of pulses. Alternating between common and clock pin.
     """
 
-    def __init__(self, pin: int, name: str, mode: Mode = Mode.TEST) -> None:
+    def __init__(self, pin: int, name: str, mode: Mode = Mode.TEST) -> Relay:
         self.is_on: bool = False
         self.mode = mode
         self.pin = pin

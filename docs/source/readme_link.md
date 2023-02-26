@@ -1,0 +1,6 @@
+# Readme
+
+------
+
+```{include} ../../README.md
+```

@@ -5,66 +5,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from time import sleep
-from typing import Protocol, Sequence
-
+from typing import Protocol
 from loguru import logger
 
 from town_clock.clock import Clock, Time
 from town_clock.util import CLOCK, Mode
+from .pulses import Pulses
 
 ONE = CLOCK.ONE
 TWO = CLOCK.TWO
-
-
-@dataclass(slots=True)
-class Pulses:
-    """Object to control the Pulse amount"""
-
-    __one: int
-    __two: int
-
-    def __post_init__(self):
-        self.one = self.__one
-        self.two = self.__two
-
-    @property
-    def one(self) -> int:
-        """
-        Pulses needed for clock one.
-
-        Returns:
-            Number of pulses required for clock one.
-        """
-        return self.__one
-
-    @one.setter
-    def one(self, value):
-        self.__one = value if value > 0 else 0
-
-    @property
-    def two(self):
-        """
-        Pulses needed for clock two.
-
-        Returns:
-            Number of pulses required for clock two.
-        """
-        return self.__two
-
-    @two.setter
-    def two(self, value):
-        self.__two = value if value > 0 else 0
-
-    def __eq__(self, o: object) -> bool:
-        if isinstance(o, Pulses):
-            return self == o
-        elif isinstance(o, Sequence):
-            return (self.one == o[0]) and (self.two == o[1])
-        else:
-            raise TypeError("Other not Pulses or a sequence for equality.")
-
-    def __repr__(self):
-        return f"Pulses({self.one, self.two})"
 
 
 class LEDRelay(Protocol):
@@ -105,8 +54,9 @@ class ClockTower:
         and 0. Fast is < 0.
         """
         count = 0
+        max_count = (self.slow.one + 1) * (self.slow.two + 1)
         try:
-            while (clock_pulses := self.slow) != [0, 0] or count > 60:
+            while (clock_pulses := self.slow) != [0, 0]:
                 if (clock_pulses.one > 0) and (clock_pulses.two > 0):
                     self.clock[ONE].pulse()
                     self.clock[TWO].pulse()
@@ -119,6 +69,8 @@ class ClockTower:
 
                 sleep(self.pulse_interval)
                 count += 1
+                if count > max_count:
+                    raise RuntimeError(f"Pulse count exceeded limit: {count}, {clock_pulses}")
         except Exception as err:
             logger.exception(err)
 

@@ -1,6 +1,10 @@
-name: Tests
+name: Testing
 
-on: [ push, pull_request ]
+on:
+  pull_request:
+  push:
+    branches: [ main, production, test-me-* ]
+
 
 jobs:
   test:
@@ -21,4 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install tox tox-gh-actions
       - name: Test with tox
-        run: tox
+        run: tox --parallel
+  precommit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - uses: pre-commit/action@v3.0.0
+      - uses: pre-commit-ci/lite-action@v1.0.1
+        if: always()

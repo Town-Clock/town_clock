@@ -80,7 +80,9 @@ class Clock:
 
     def pulse(self, num_pulses: int = 1) -> Clock:
         """Pulse the clock"""
-        for _ in range(num_pulses):
+        if not isinstance(num_pulses, int):
+            raise TypeError(f"Clock pulse args must be of type int, got: {type(num_pulses).__name__}")
+        for _ in range(int(num_pulses)):
             self.relay.pulse()
             self.slow -= 1
             if num_pulses > 1:
