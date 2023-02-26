@@ -58,7 +58,7 @@ class Pulses:
         elif isinstance(o, Sequence):
             return (self.one == o[0]) and (self.two == o[1])
         else:
-            raise NotImplemented
+            return NotImplemented
 
     def __repr__(self) -> str:
         return f"Pulses({self.one}, {self.two})"

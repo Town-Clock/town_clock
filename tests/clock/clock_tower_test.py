@@ -6,7 +6,7 @@ from __future__ import annotations
 import pytest
 from icecream import ic
 
-from town_clock import Clock, ClockTower, Time, Pulses
+from town_clock import Clock, ClockTower, Time
 from town_clock.util import CLOCK, Mode
 
 
@@ -37,8 +37,18 @@ TWO = CLOCK.TWO
 @pytest.fixture
 def mock_clock_dict() -> dict[CLOCK, Clock]:
     return {
-        ONE: Clock(ONE, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
-        TWO: Clock(TWO, relay=MOCK_ClockRelay(), time_on_clock=0, sleep_time=0.01),
+        ONE: Clock(
+            ONE,
+            relay=MOCK_ClockRelay(),
+            time_on_clock=0,
+            sleep_time=0.01,
+        ),
+        TWO: Clock(
+            TWO,
+            relay=MOCK_ClockRelay(),
+            time_on_clock=0,
+            sleep_time=0.01,
+        ),
     }
 
 
@@ -82,7 +92,12 @@ def test_clock_tower_slow_property(
         (0, -1, [0, 0]),
     ),
 )
-def test_clock_tower_pulse(c1, c2, expected, default_town_clock: ClockTower) -> None:
+def test_clock_tower_pulse(
+    c1,
+    c2,
+    expected,
+    default_town_clock: ClockTower,
+) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
     default_town_clock.pulse()

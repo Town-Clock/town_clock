@@ -82,7 +82,8 @@ class Clock:
         """Pulse the clock"""
         if not isinstance(num_pulses, int):
             raise TypeError(
-                f"Clock pulse args must be of type int, got: {type(num_pulses).__name__}"
+                f"Clock pulse args must be of type int, got: "
+                f"{type(num_pulses).__name__}"
             )
         for _ in range(int(num_pulses)):
             self.relay.pulse()

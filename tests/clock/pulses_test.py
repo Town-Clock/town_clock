@@ -28,7 +28,7 @@ def test_Pulse_Class(pulses, expected):
         ((2, 2), -10, (0, 0)),
     ),
 )
-def test_Pulse_Class(pulses, adder, expected):
+def test_Pulse_Class_addition(pulses, adder, expected):
     pulses = Pulses(*pulses)
     pulses.one += adder
     pulses.two += adder
