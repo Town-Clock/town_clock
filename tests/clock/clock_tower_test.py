@@ -100,7 +100,7 @@ def test_clock_tower_pulse(
 ) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
-    default_town_clock.pulse()
+    default_town_clock.pulse_clocks()
     relay_clock_1 = default_town_clock.clock[ONE].relay.count  # type: ignore
     relay_clock_2 = default_town_clock.clock[TWO].relay.count  # type: ignore
     assert [relay_clock_1, relay_clock_2] == expected

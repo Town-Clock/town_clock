@@ -1,4 +1,4 @@
-town\_clock package
+town\_clock
 ===================
 
 Subpackages
@@ -11,7 +11,7 @@ Subpackages
    town_clock.ui
    town_clock.util
 
-Submodules
+Modules
 ----------
 
 town\_clock.controller module

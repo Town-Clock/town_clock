@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "town-clock"
-version = "1.1.0"
+version = "1.1.1"
 description = "An application that runs a raspberry pi based town clock."
 authors = ["Zack Hankin <zthankin@gmail.com>"]
 license = "MIT"

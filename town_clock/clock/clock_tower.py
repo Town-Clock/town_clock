@@ -10,14 +10,18 @@ from loguru import logger
 
 from town_clock.clock import Clock, Time
 from town_clock.util import CLOCK, Mode
-from .pulses import Pulses
+from town_clock.util.clock_exceptions import PulseError
+from town_clock.clock.pulses import Pulses
 
 ONE = CLOCK.ONE
 TWO = CLOCK.TWO
 
 
 class LEDRelay(Protocol):
-    """LED Relay Protocol"""
+    """
+    LED Relay Protocol
+    :NoIndex:
+    """
 
     def turn_on(self) -> LEDRelay:
         ...
@@ -30,6 +34,16 @@ class LEDRelay(Protocol):
 class ClockTower:
     """
     Controls the flow of information between the ui and the clocks.
+
+    Parameters:
+        running (bool):
+        time (Time):
+        mode (Mode):
+        led (LEDRelay):
+        clock (dict[CLOCK, Clock]):
+        position (dict[str, float]):
+        pulse_interval (float): Default is 0.5.
+
     """
 
     running: bool
@@ -41,17 +55,37 @@ class ClockTower:
     pulse_interval: float = field(default=0.5)
 
     @property
-    def slow(self):
+    def slow(self) -> Pulses:
+        """
+        How many minutes slow is the clock? If the clock is fast that clock
+        will return 0.
+
+        Returns:
+            Pulses: How many pulses required to bring the clock back to
+                    current time.
+        """
         return Pulses(*(clock.slow for clock in self.clock.values()))
 
     @property
-    def is_night(self):
+    def is_night(self) -> bool:
+        """
+        Is it Night time.
+
+        Returns:
+            bool: True if nighttime.
+        """
         return NotImplemented
 
-    def pulse(self) -> None:
+    def pulse_clocks(self) -> None:
         """
-        Handles both slow and fast cases using the max of "Clock.slow"
-        and 0. Fast is < 0.
+        Pulse the clocks using the Pulse class.
+
+        Raises:
+            PulseError: When count goes beyond the max limit
+                        (self.slow.one + 1) * (self.slow.two + 1).
+
+        Todo:
+            Work on exception handling.
         """
         count = 0
         max_count = (self.slow.one + 1) * (self.slow.two + 1)
@@ -70,7 +104,7 @@ class ClockTower:
                 sleep(self.pulse_interval)
                 count += 1
                 if count > max_count:
-                    raise RuntimeError(
+                    raise PulseError(
                         f"Pulse count exceeded limit: {count}, {clock_pulses}"
                     )
         except Exception as err:
@@ -82,7 +116,8 @@ class ClockTower:
 
     def check_if_night(self) -> None:
         """
-        Todo: change from int to dict of the time of day list.
+        Todo:
+            change from int to dict of the time of day list.
         """
         if self.time.is_night():
             raise NotImplementedError

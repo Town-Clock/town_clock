@@ -6,9 +6,9 @@
 
 ## Documentation
 
-Current main:
+Current main: [GitHub Pages](https://town-clock.github.io/town_clock/)
 
-All versions:
+All versions: [Read The Docs](https://readthedocs.org/projects/rpi-town-clock/)
 
 ----
 
