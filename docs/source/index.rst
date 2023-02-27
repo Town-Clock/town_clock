@@ -2,14 +2,12 @@ Welcome to Town Clock's documentation!
 ======================================
 
 .. toctree::
-   :maxdepth: 0
+   :maxdepth: 4
    :caption: Contents:
 
    readme_link
    licence
-   modules
-
-
+   town_clock
 
 Indices and tables
 ==================

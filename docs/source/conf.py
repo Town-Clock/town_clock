@@ -6,10 +6,46 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import pathlib
+
+
+def fetch_version(max_folders_up: int = 3) -> tuple[str, str]:
+    """
+    Fetches the version number for the pyproject.toml
+    folder no more than 2 up.
+
+    Args:
+        max_folders_up (int): Max number of folders up to search.
+
+    Returns:
+        tuple[str, str]: Release and Version number for project,
+                         using the semantic version style.
+                         E.g. "0.1.1", "0.1"
+    """
+    ret_release: str = ">0.2.0"
+    try:
+        for idx in range(max_folders_up):
+            path = pathlib.Path("../" * idx + "pyproject.toml")
+            if path.is_file():
+                break
+        else:
+            raise FileNotFoundError("pyproject.toml not found")
+        pyproject_toml = path.resolve()
+        with open(pyproject_toml, "r") as fin:
+            for line in fin.readlines():
+                if line.startswith("version"):
+                    ret_release = line.split('"')[1]
+    except FileNotFoundError:
+        raise
+    ret_version: str = ret_release.rpartition(".")[0]
+    return ret_release, ret_version
+
+
 project = "Town Clock"
 copyright = "2023, Zack Hankin <zthankin@gmail.com>"
 author = "Zack Hankin <zthankin@gmail.com>"
-release = "v1.0.2"
+release, _ = fetch_version()
+version = release
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
