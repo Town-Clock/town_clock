@@ -26,7 +26,7 @@ class Clock:
     """
     Class Clock
 
-    params:
+    Parameters:
         name (CLOCK): The name of the clock in enum form.
         relay (ClockRelay): The relay that this Clock controls.
         time_on_clock (int): minutes past 12 AM/PM (0-719)

@@ -7,8 +7,6 @@ Started: 20/02/2023
 from __future__ import annotations
 from typing import Sequence
 
-from icecream import ic
-
 
 class GreaterThanZero:
     """Class descriptor that ensures the value is greater zero."""
@@ -16,12 +14,10 @@ class GreaterThanZero:
     __slots__ = ["name"]
 
     def __init__(self) -> None:
-        print(">0(__init__)")
         self.name: str = ""
 
     def __set_name__(self, owner, name):
         self.name = f"_{name}"
-        ic(self.name)
 
     def __get__(self, instance, owner=None) -> int:
         ret_value: int = getattr(instance, self.name)
@@ -42,17 +38,25 @@ class GreaterThanZero:
 class Pulses:
     """Object to control the Pulse amount"""
 
+    __slots__ = ["_one", "_two"]
+
     one = GreaterThanZero()
     two = GreaterThanZero()
 
-    # __slots__ = ["_one", "_two"]
-
     def __init__(self, one: int = 0, two: int = 0) -> None:
-        print("P(__init__)")
         self.one = one
         self.two = two
 
     def __eq__(self, o: object) -> bool:
+        """
+        Pulses equality works with both Pulses or Sequences.
+
+        Args:
+            o (Pulses | Sequence): Pulses or Sequence to compare.
+
+        Returns:
+            bool: True if equal.
+        """
         if isinstance(o, Pulses):
             return self == o
         elif isinstance(o, Sequence):
