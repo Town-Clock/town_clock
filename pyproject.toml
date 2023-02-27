@@ -36,14 +36,6 @@ types-cffi = "^1.15.1.5"
 flake8 = "^6.0.0"
 tox = "^4.4.5"
 
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx = "^5"
-myst-parser = "^0.18.1"
-sphinx-rtd-theme = "^1"
-
 [tool.poetry.extras]
 docs = ['sphinx', 'myst-parser', 'sphinx-rtd-theme']
 
