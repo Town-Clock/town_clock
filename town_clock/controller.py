@@ -8,6 +8,7 @@ import sys
 import time
 
 from town_clock.util import Mode
+from util import Position
 
 
 class Controller:
@@ -30,9 +31,7 @@ class Controller:
         clock_pins: tuple[int, int],
         led_pin: int,
         common_pin: int,
-        lat: float,
-        long: float,
-        alt: float,
+        position: Position,
         mode: Mode = Mode.DEV,
     ) -> None:
         self.pins = {
@@ -41,11 +40,7 @@ class Controller:
             "led_pin": led_pin,
         }
         self.mode: Mode = mode
-        self.position: dict[str, float] = {
-            "latitude": lat,
-            "longitude": long,
-            "altitude": alt,
-        }
+        self.position: Position = position
 
     def run(self) -> None:
         """
@@ -53,8 +48,6 @@ class Controller:
         """
         try:
             while True:
-                # ic('Controller.run')
-                # ic(self.__dict__)
                 raise KeyboardInterrupt
         except KeyboardInterrupt:
             self.destroy()

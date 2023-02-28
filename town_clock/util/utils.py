@@ -1,5 +1,6 @@
+from __future__ import annotations
 from enum import Enum
-from typing import Literal
+from typing import Any, Literal, Optional
 
 
 class Log_Level(Enum):
@@ -70,3 +71,84 @@ def convert_position_string_to_number(position_str: str) -> float:
         case "S" | "W":
             direction = -1
     return float("".join(pos_list)) * direction
+
+
+class PositionError(Exception):
+    """Error with the Position Object of any kind."""
+
+    pass
+
+
+class PositionValue:
+    """
+    PositionValues Descriptor
+
+    Ensures that there is only one value stored and never changed.
+
+    Parameters:
+        name (str): Name of the value set in the instance.
+
+    Raises:
+        PositionError: If there is no attribute by that name or when it is
+                       set, and it is assigned to again.
+    """
+
+    def __init__(self):
+        self.name: str = ""
+        self._name: str = ""
+
+    def __set_name__(self, owner: object, name: str) -> None:
+        self.name = name
+        self._name = "_" + name
+
+    def __get__(self, instance: object, owner: type[object]) -> Any:
+        try:
+            return getattr(instance, self._name)
+        except AttributeError:
+            raise PositionError(f"Position has no attribute: " f"{self.name}")
+
+    def __set__(self, instance: object, value: Any) -> None:
+        try:
+            getattr(instance, self._name)
+        except AttributeError:
+            setattr(instance, self._name, value)
+        else:
+            error_str = f"Try to set {self.name} when it is already set."
+            raise PositionError(error_str)
+
+
+class Position:
+    """
+    Singleton Position
+
+    Parameters:
+        latitude (float): Degrees north from the equator in decimal degrees.
+                          South is negative.
+        longitude (float): Degrees east from the prime meridian in decimal
+                           degrees. West is negative.
+        altitude (float): Metres above mean sea level(MSL).
+    """
+
+    longitude: PositionValue = PositionValue()
+    latitude: PositionValue = PositionValue()
+    altitude: PositionValue = PositionValue()
+
+    __current_position__: Optional[Position] = None
+
+    def __new__(cls, *args, **kwargs):
+        if not isinstance(cls.__current_position__, Position):
+            cls.__current_position__ = super().__new__(cls)
+        return cls.__current_position__
+
+    def __init__(
+        self,
+        latitude: float = 0,
+        longitude: float = 0,
+        altitude: float = 0,
+    ) -> None:
+        self.latitude = latitude  # type: ignore
+        self.longitude = longitude  # type: ignore
+        self.altitude = altitude  # type: ignore
+
+    def __repr__(self) -> str:
+        return f"Position({self.latitude}, {self.longitude}, {self.altitude})"

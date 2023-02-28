@@ -12,9 +12,14 @@ from .utils import (
     convert_position_string_to_number,
     Log_Level,
     Mode,
+    Position,
 )
 
-from .location_sunrise_sunset import timezone_finder, find_sunrise_sunset_times
+from .location_sunrise_sunset import (
+    timezone_finder,
+    find_sunrise_sunset_times,
+    TimeOfDay,
+)
 
 __all__: list[str] = [
     "timezone_finder",
@@ -23,4 +28,6 @@ __all__: list[str] = [
     "Mode",
     "CLOCK",
     "convert_position_string_to_number",
+    "TimeOfDay",
+    "Position",
 ]

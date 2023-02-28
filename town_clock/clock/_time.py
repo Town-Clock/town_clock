@@ -16,19 +16,24 @@ from loguru import logger
 from pendulum import DateTime
 from pendulum.tz.timezone import Timezone
 
+from town_clock.util import find_sunrise_sunset_times, TimeOfDay, Position
+
 
 @dataclass
 class Time:
     """
-    now: pendulum.DateTime:
-    clock_time: int: minutes from 12 AM/PM
-    timezone: Timezone | str: Timezone of the clock.
-    Default is "Australia/Sydney".
+    Parameters:
+        now (pendulum.DateTime):
+        clock_time (int): minutes from 12 AM/PM
+        timezone (Timezone | str): Timezone of the clock.
+                                   Default is "Australia/Sydney".
     """
 
     now: DateTime = field(default=pendulum.from_timestamp(0))
     clock_time: int = field(default=-1)
     timezone: Optional[Timezone | str] = "Australia/Sydney"
+    sun_events: dict[TimeOfDay, float] = field(default_factory=dict)
+    position: Position = Position()
 
     def __post_init__(self):
         """
@@ -50,6 +55,16 @@ class Time:
     def get_time_from_file(self) -> DateTime:
         return NotImplemented
 
+    def set_sun_events(self) -> Time:
+        """
+        Sets the upcomming last light, sunset, first light and sunrise.
+
+        Returns:
+            Time: self
+        """
+        self.sun_events = find_sunrise_sunset_times(self.position)
+        return self
+
     def set_clock_time(self, tm: int | DateTime) -> Time:
         """
         Converts from time | DateTime to minutes since 12 AM/PM
@@ -57,10 +72,10 @@ class Time:
         Always rounds down to the nearest minute.
 
         Args:
-            tm: int: seconds since epoch.
+            tm (int): seconds since epoch.
 
         Returns:
-            self
+            Time: self
         """
         dt: DateTime
         if isinstance(tm, int):
