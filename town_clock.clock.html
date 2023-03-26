@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>town_clock.clock package &mdash; Town Clock 1.1.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="town_clock.ui package" href="town_clock.ui.html" />
+    <link rel="prev" title="town_clock" href="town_clock.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Town Clock
+          </a>
+              <div class="version">
+                1.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html">Readme</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_link.html#town-clock">Town Clock</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="town_clock.html">town_clock</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="town_clock.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">town_clock.clock package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-town_clock.clock.clock">town_clock.clock.clock module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#town-clock-clock-clock-tower-module">town_clock.clock.clock_tower module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#town-clock-clock-pulses-module">town_clock.clock.pulses module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#town-clock-clock-relay-module">town_clock.clock.relay module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="town_clock.ui.html">town_clock.ui package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="town_clock.util.html">town_clock.util package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="town_clock.html#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="town_clock.html#town-clock-controller-module">town_clock.controller module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="town_clock.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Town Clock</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="town_clock.html">town_clock</a></li>
+      <li class="breadcrumb-item active">town_clock.clock package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/town_clock.clock.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="town-clock-clock-package">
+<h1>town_clock.clock package<a class="headerlink" href="#town-clock-clock-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-town_clock.clock.clock">
+<span id="town-clock-clock-clock-module"></span><h2>town_clock.clock.clock module<a class="headerlink" href="#module-town_clock.clock.clock" title="Permalink to this heading"></a></h2>
+<p>clock.py</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Clock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="town_clock.util.html#town_clock.util.utils.CLOCK" title="town_clock.util.utils.CLOCK"><span class="pre">CLOCK</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">relay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#town_clock.clock.clock.ClockRelay" title="town_clock.clock.clock.ClockRelay"><span class="pre">ClockRelay</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_on_clock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/town_clock/clock/clock.html#Clock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#town_clock.clock.clock.Clock" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class Clock</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">CLOCK</span></code>) – The name of the clock in enum form.</p></li>
+<li><p><strong>relay</strong> (<a class="reference internal" href="#town_clock.clock.clock.ClockRelay" title="town_clock.clock.clock.ClockRelay"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClockRelay</span></code></a>) – The relay that this Clock controls.</p></li>
+<li><p><strong>time_on_clock</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – minutes past 12 AM/PM (0-719)</p></li>
+<li><p><strong>slow</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Minutes slow, fast is negative.</p></li>
+<li><p><strong>cutoff</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Value is used to work out how long the
+clock will sleep for. Default is 30.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.compare">
+<span class="sig-name descname"><span class="pre">compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clock_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#town_clock.clock.clock.Clock" title="town_clock.clock.clock.Clock"><span class="pre">Clock</span></a></span></span><a class="reference internal" href="_modules/town_clock/clock/clock.html#Clock.compare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#town_clock.clock.clock.Clock.compare" title="Permalink to this definition"></a></dt>
+<dd><p>Compares the time on the clock with the given time and
+works out how slow or fast it is.</p>
+<p>The ‘self.cutoff’ value is used to work out
+how long the clock will sleep for.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>clock_time</strong> – int: Time.clock_time, minutes after 12 AM/PM.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.cutoff">
+<span class="sig-name descname"><span class="pre">cutoff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#town_clock.clock.clock.Clock.cutoff" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="town_clock.util.html#town_clock.util.utils.CLOCK" title="town_clock.util.utils.CLOCK"><span class="pre">CLOCK</span></a></em><a class="headerlink" href="#town_clock.clock.clock.Clock.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.pulse">
+<span class="sig-name descname"><span class="pre">pulse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_pulses</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#town_clock.clock.clock.Clock" title="town_clock.clock.clock.Clock"><span class="pre">Clock</span></a></span></span><a class="reference internal" href="_modules/town_clock/clock/clock.html#Clock.pulse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#town_clock.clock.clock.Clock.pulse" title="Permalink to this definition"></a></dt>
+<dd><p>Pulse the clock</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.relay">
+<span class="sig-name descname"><span class="pre">relay</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#town_clock.clock.clock.ClockRelay" title="town_clock.clock.clock.ClockRelay"><span class="pre">ClockRelay</span></a></em><a class="headerlink" href="#town_clock.clock.clock.Clock.relay" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.sleep_time">
+<span class="sig-name descname"><span class="pre">sleep_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></em><a class="headerlink" href="#town_clock.clock.clock.Clock.sleep_time" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.slow">
+<span class="sig-name descname"><span class="pre">slow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#town_clock.clock.clock.Clock.slow" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="town_clock.clock.clock.Clock.time_on_clock">
+<span class="sig-name descname"><span class="pre">time_on_clock</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#town_clock.clock.clock.Clock.time_on_clock" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="town_clock.clock.clock.ClockRelay">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ClockRelay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/town_clock/clock/clock.html#ClockRelay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#town_clock.clock.clock.ClockRelay" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Protocol</span></code></p>
+<p>Relay Protocol</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="town_clock.clock.clock.ClockRelay.pulse">
+<span class="sig-name descname"><span class="pre">pulse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/town_clock/clock/clock.html#ClockRelay.pulse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#town_clock.clock.clock.ClockRelay.pulse" title="Permalink to this definition"></a></dt>
+<dd><p>pulse method</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="town-clock-clock-clock-tower-module">
+<h2>town_clock.clock.clock_tower module<a class="headerlink" href="#town-clock-clock-clock-tower-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="town-clock-clock-pulses-module">
+<h2>town_clock.clock.pulses module<a class="headerlink" href="#town-clock-clock-pulses-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="town-clock-clock-relay-module">
+<h2>town_clock.clock.relay module<a class="headerlink" href="#town-clock-clock-relay-module" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="town_clock.html" class="btn btn-neutral float-left" title="town_clock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="town_clock.ui.html" class="btn btn-neutral float-right" title="town_clock.ui package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Zack Hankin &lt;zthankin@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
