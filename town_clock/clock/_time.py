@@ -13,7 +13,7 @@ from typing import Optional
 
 import pendulum
 from loguru import logger
-from pendulum import DateTime
+from pendulum.datetime import DateTime
 from pendulum.tz.timezone import Timezone
 
 

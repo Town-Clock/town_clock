@@ -8,6 +8,7 @@ import sys
 import time
 
 from town_clock.util import Mode
+from town_clock.ui.buttons import Buttons
 
 
 class Controller:
@@ -28,6 +29,7 @@ class Controller:
     def __init__(
         self,
         clock_pins: tuple[int, int],
+        button_pins: dict[str, int],
         led_pin: int,
         common_pin: int,
         lat: float,
@@ -46,6 +48,7 @@ class Controller:
             "longitude": long,
             "altitude": alt,
         }
+        self.buttons = Buttons(button_pins)
 
     def run(self) -> None:
         """
@@ -84,9 +87,6 @@ class Controller:
 def get_cpu_temp() -> float:
     """
     Returns the cpu temp when called.
-
-    Todo:
-        Fix to work with windows.
 
     Returns:
         float
