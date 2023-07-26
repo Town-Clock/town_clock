@@ -15,14 +15,15 @@ from town_clock.util.clock_exceptions import ButtonError
 class Buttons:
     """
     Class for controlling the button interface from user.
-    
+
     Button name:
         - up
         - down
         - left
         - right
-        - select 
+        - select
     """
+
     def __init__(self, button_pins: dict[str, int]) -> None:
         """Class for controlling the button interface from user.
 
@@ -32,7 +33,7 @@ class Buttons:
         - left
         - right
         - select
-        
+
         Args:
             button_pins (dict[str, int]): The pin number of the raspbery pi this is button is connected to.
 
@@ -44,22 +45,22 @@ class Buttons:
         self.left = None
         self.right = None
         self.select = None
-        self.button_names = ['up', 'down', 'left', 'right', 'select']
-        
+        self.button_names = ["up", "down", "left", "right", "select"]
+
         for button_name in self.button_names:
             try:
                 self.__dict__[button_name] = button_pins[button_name]
             except KeyError as error:
-                raise ButtonError( 
-                                  f"Invalid button name for {button_name}. "
-                                  f"Ensure all 5 button names are correctly spelt."
-                                  ) from error        
-    
+                raise ButtonError(
+                    f"Invalid button name for {button_name}. "
+                    f"Ensure all 5 button names are correctly spelt."
+                ) from error
+
     def is_pressed(self) -> bool:
         """Flag for any button is pressed.
 
         Todo: is_pressed
-        
+
         Returns:
             bool: A button is pressed.
         """
@@ -67,17 +68,17 @@ class Buttons:
 
     def __str__(self) -> str:
         return str(self.button_values)
-    
+
     def __repr__(self) -> str:
         return f"Buttons({', '.join(self.__dict__)})"
-    
+
     def button_value(self, button: str) -> bool:
         """Button value
-        
+
         Returns the value of a given button.
-        
+
         Todo: button_value
-        
+
         Args:
             button (str): Button name.
 
@@ -93,11 +94,16 @@ class Buttons:
             ret_dict[button] = self.button_value(button)
         return ret_dict
 
-if __name__ == '__main__':
-    print(Buttons({
-        'up': 5,
-        'dwn': 6,
-        'left': 7,
-        'right': 8,
-        'select': 9,
-    }))
+
+if __name__ == "__main__":
+    print(
+        Buttons(
+            {
+                "up": 5,
+                "dwn": 6,
+                "left": 7,
+                "right": 8,
+                "select": 9,
+            }
+        )
+    )
