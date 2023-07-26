@@ -39,13 +39,13 @@ def mock_clock_dict() -> dict[CLOCK, Clock]:
     return {
         ONE: Clock(
             ONE,
-            relay=MOCK_ClockRelay(),
+            clock_relay=MOCK_ClockRelay(),
             time_on_clock=0,
             sleep_time=0.01,
         ),
         TWO: Clock(
             TWO,
-            relay=MOCK_ClockRelay(),
+            clock_relay=MOCK_ClockRelay(),
             time_on_clock=0,
             sleep_time=0.01,
         ),
@@ -101,6 +101,6 @@ def test_clock_tower_pulse(
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
     default_town_clock.pulse_clocks()
-    relay_clock_1 = default_town_clock.clock[ONE].relay.count  # type: ignore
-    relay_clock_2 = default_town_clock.clock[TWO].relay.count  # type: ignore
+    relay_clock_1 = default_town_clock.clock[ONE].clock_relay.count  # type: ignore
+    relay_clock_2 = default_town_clock.clock[TWO].clock_relay.count  # type: ignore
     assert [relay_clock_1, relay_clock_2] == expected

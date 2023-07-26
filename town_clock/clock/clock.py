@@ -10,15 +10,25 @@ from typing import Protocol
 
 from loguru import logger
 
-from town_clock.util import CLOCK
+from town_clock.util import CLOCK, clock_logging
+
+
+# Constants
+twelve_hours = 720
 
 
 class ClockRelay(Protocol):
-    """Relay Protocol"""
+    """Clock Relay Protocol"""
 
-    def pulse(self):
-        """pulse method"""
+    def turn_on(self):
         ...
+    
+    def turn_off(self):
+        ...
+
+class CommonRelay(ClockRelay, Protocol):
+    """Common Relay Protocol"""
+    ...
 
 
 @dataclass
@@ -28,24 +38,30 @@ class Clock:
 
     Parameters:
         name (CLOCK): The name of the clock in enum form.
-        relay (ClockRelay): The relay that this Clock controls.
+        clock_relay (ClockRelay): The relay that this Clock controls.
+        clock_relay (ClockRelay): The relay that this Clock controls.
+        clock_relay (ClockRelay): The relay that this Clock controls.
         time_on_clock (int): minutes past 12 AM/PM (0-719)
         slow (int): Minutes slow, fast is negative.
         cutoff (int): Value is used to work out how long the
                       clock will sleep for. Default is 30.
     """
-
     name: CLOCK
-    relay: ClockRelay
-    time_on_clock: int
+    clock_relay: ClockRelay
+    common_relay: CommonRelay
+    other_clock_relay: ClockRelay
+    time_on_clock: int 
     slow: int = field(default=0)
     cutoff: int = field(default=30)
     sleep_time: float = field(default=0.5)
 
+  
     def compare(self, clock_time: int) -> Clock:
         """
         Compares the time on the clock with the given time and
         works out how slow or fast it is.
+        
+        Slow is positive.
 
         The 'self.cutoff' value is used to work out
         how long the clock will sleep for.
@@ -58,23 +74,28 @@ class Clock:
         """
 
         difference: int = clock_time - self.time_on_clock
-
-        while difference >= 720:
+        
+        # 1. Ensure that the difference is less than 12 hours in either direction.
+        while difference >= twelve_hours:
             logger.error(f"Clock {self.name.name} Difference: {difference}")
-            difference -= 720
-        while difference <= -720:
+            difference -= twelve_hours
+        while difference <= -twelve_hours:
             logger.error(f"Clock {self.name.name} Difference: {difference}")
-            difference += 720
+            difference += twelve_hours
+        
+        # 2. Make the difference positive. Pulse multi-hour rather than wait.
+        if difference < 0:
+            difference += twelve_hours
 
-        if difference < 0:  # Difference is negative.
-            difference += 720
+        # 3. Check if the difference is smaller than the cutoff. If so, let the clock sleep.
+        if (twelve_hours - self.cutoff) <= difference < twelve_hours:
+            difference -= twelve_hours
 
-        if (720 - self.cutoff) <= difference < 720:
-            difference -= 720
-
-        if difference == 720:
+        # 4. If the difference is equal to twelve hours, set it to 0. 
+        if difference == twelve_hours:
             difference = 0
 
+        # Finally set self.slow to the difference then return self.
         self.slow = difference
         return self
 
@@ -86,8 +107,10 @@ class Clock:
                 f"{type(num_pulses).__name__}"
             )
         for _ in range(int(num_pulses)):
-            self.relay.pulse()
+            # self.clock_relay.pulse() # Todo: Add pulse logic here.
             self.slow -= 1
             if num_pulses > 1:
                 time.sleep(self.sleep_time)
+            else:
+                break
         return self

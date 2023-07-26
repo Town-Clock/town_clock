@@ -24,28 +24,33 @@ class Buttons:
         - select
     """
 
-    def __init__(self, button_pins: dict[str, int]) -> None:
+    def __init__(
+        self, 
+        button_pins: dict[str, int], 
+        button_names = ["up", "down", "left", "right", "select"]
+        ) -> None:
         """Class for controlling the button interface from user.
 
-        Button name:
-        - up
-        - down
-        - left
-        - right
-        - select
+        Default button names:
+            - up
+            - down
+            - left
+            - right
+            - select
 
         Args:
             button_pins (dict[str, int]): The pin number of the raspbery pi this is button is connected to.
+            button_names (list[str]): List of the valid names. Default is ["up", "down", "left", "right", "select"].
 
         Raises:
-            ButtonError: If button name is not one of the 5 valid options.
+            ButtonError: If button name is not one of the valid options given in button_names.
         """
         self.up = None
         self.down = None
         self.left = None
         self.right = None
         self.select = None
-        self.button_names = ["up", "down", "left", "right", "select"]
+        self.button_names = button_names
 
         for button_name in self.button_names:
             try:
@@ -70,7 +75,13 @@ class Buttons:
         return str(self.button_values)
 
     def __repr__(self) -> str:
-        return f"Buttons({', '.join(self.__dict__)})"
+        ret_str = (
+            "Buttons(button_pins={" + 
+            ', '.join(str(key + ': ' + str(value)) for 
+            key, value in self.__dict__.items()
+            if key in self.button_names) + "})"
+            )
+        return ret_str
 
     def button_value(self, button: str) -> bool:
         """Button value
@@ -97,13 +108,13 @@ class Buttons:
 
 if __name__ == "__main__":
     print(
-        Buttons(
+        repr(Buttons(
             {
                 "up": 5,
-                "dwn": 6,
+                "down": 6,
                 "left": 7,
                 "right": 8,
                 "select": 9,
             }
-        )
+        ))
     )
