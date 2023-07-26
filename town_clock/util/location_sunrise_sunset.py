@@ -13,7 +13,7 @@ from timezonefinder import TimezoneFinder
 
 def timezone_finder(latitude: float, longitude: float):
     tf = TimezoneFinder()
-    tz: str = tf.timezone_at(lng=longitude, lat=latitude)
+    tz = str(tf.timezone_at(lng=longitude, lat=latitude))
     return timezone(tz)
 
 
@@ -31,7 +31,7 @@ def find_sunrise_sunset_times(
     t1 = ts.from_datetime(next_midday)
 
     # Setting up Position and Function
-    eph: Loader = load("de421.bsp")
+    eph = load("de421.bsp")
     position = wgs84.latlon(
         latitude_degrees=latitude,
         longitude_degrees=longitude,
@@ -42,12 +42,11 @@ def find_sunrise_sunset_times(
 
     # Running Function
     sunset_sunrise_times = {}
-    # previous_e = f(t0).item()
     idx: int = 0
     for t, e in zip(times, events):
         if e in [3, 4]:
-            idx += 1
             struct_time = t.astimezone(zone).timetuple()
             sunset_sunrise_times[idx] = time.mktime(struct_time)
+            idx += 1
 
     return sunset_sunrise_times

@@ -4,36 +4,65 @@ relay.py
 todo: better error handling
 """
 from __future__ import annotations
-import time
 
 from town_clock.util import Mode, CLOCK
-from town_clock.util.clock_exceptions import PulseError
+from loguru import logger
 
 
 class Relay:
     """
     Class for relay.
-    todo:
-        remember to order of pulses. Alternating between common and clock pin.
     """
 
-    def __init__(self, pin: int, name: str, mode: Mode = Mode.TEST) -> None:
+    def __init__(
+        self, pin: int, name: str, pulse_length=0.2, mode: Mode = Mode.DEV
+    ) -> None:
         self.is_on: bool = False
-        self.mode = mode
-        self.pin = pin
-        self.name = name
+        self.mode: Mode = mode
+        self.name: str = name
+        self.pin: int = pin
+        self.pulse_length: float = pulse_length
+        # if self.mode != Mode.ACTIVE:
+        #     import ...
 
     def turn_on(self) -> None:
         self.is_on = True
+        ...
 
     def turn_off(self) -> None:
         self.is_on = False
+        ...
+
+
+class CommonRelay(Relay):
+    common_relay = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls.common_relay == None:
+            cls.common_relay = super().__new__(cls)
+        return cls.common_relay
+
+    def __init__(
+        self,
+        pin: int,
+        name: str = "Common Relay",
+        pulse_length=0.2,
+        mode: Mode = Mode.DEV,
+    ) -> None:
+        super().__init__(pin, name, pulse_length, mode)
 
 
 class ClockRelay(Relay):
     """Clock Relay Class"""
 
-    def __init__(self, common_pin: int, clock: CLOCK, *args, **kwargs) -> None:
+    def __init__(
+        self,
+        pin: int,
+        name: str,
+        clock: CLOCK,
+        pulse_length=0.2,
+        mode: Mode = Mode.DEV,
+    ) -> None:
         """
         Init Clock Relay
 
@@ -42,26 +71,31 @@ class ClockRelay(Relay):
             clock: CLOCK
             pin: int
             name: str
-            mode: Mode = Mode.TEST
+            mode: Mode = Mode.DEV
         """
-        self.common_pin = common_pin
+        super().__init__(pin, name, pulse_length, mode)
         self.clock: CLOCK = clock
-        super().__init__(*args, **kwargs)
-
-    def pulse(self) -> bool:
-        """
-        Pulse the relay.
-        """
-        try:
-            self.turn_on()
-            time.sleep(0.1)
-            self.turn_off()
-            return True
-        except Exception:
-            raise PulseError(False, f"Failed to pulse: {self.name}")
+        self.direction = 0
 
 
 class LEDRelay(Relay):
     """LED Relay"""
 
-    ...
+    def __init__(
+        self, pin: int, name: str, pulse_length=0.2, mode: Mode = Mode.DEV
+    ) -> None:
+        super().__init__(pin, name, pulse_length, mode)
+
+    @property
+    def lights_on(self) -> bool:
+        return self.is_on
+
+    @lights_on.setter
+    def lights_on(self, is_night) -> None:
+        is_on = self.is_on
+        if is_night & (not is_on):
+            self.turn_on()
+            logger.log("INFO", "Lights on")
+        elif not is_night & is_on:
+            self.turn_off
+            logger.log("INFO", "Lights off")

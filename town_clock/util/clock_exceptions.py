@@ -47,3 +47,7 @@ class PulseError(BaseClockException):
 
 class NoValidTimeFromFileError(BaseClockException):
     ...
+
+
+class ButtonError(BaseClockException):
+    ...

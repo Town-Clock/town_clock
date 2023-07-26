@@ -20,7 +20,7 @@ class MockRelay:
 def default_clock():
     return Clock(
         name=CLOCK.ONE,
-        relay=MockRelay(),
+        clock_relay=MockRelay(),
         time_on_clock=0,
         cutoff=30,
         sleep_time=0.01,
