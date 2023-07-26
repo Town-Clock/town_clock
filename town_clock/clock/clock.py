@@ -22,12 +22,14 @@ class ClockRelay(Protocol):
 
     def turn_on(self):
         ...
-    
+
     def turn_off(self):
         ...
 
+
 class CommonRelay(ClockRelay, Protocol):
     """Common Relay Protocol"""
+
     ...
 
 
@@ -46,21 +48,21 @@ class Clock:
         cutoff (int): Value is used to work out how long the
                       clock will sleep for. Default is 30.
     """
+
     name: CLOCK
     clock_relay: ClockRelay
     common_relay: CommonRelay
     other_clock_relay: ClockRelay
-    time_on_clock: int 
+    time_on_clock: int
     slow: int = field(default=0)
     cutoff: int = field(default=30)
     sleep_time: float = field(default=0.5)
 
-  
     def compare(self, clock_time: int) -> Clock:
         """
         Compares the time on the clock with the given time and
         works out how slow or fast it is.
-        
+
         Slow is positive.
 
         The 'self.cutoff' value is used to work out
@@ -74,7 +76,7 @@ class Clock:
         """
 
         difference: int = clock_time - self.time_on_clock
-        
+
         # 1. Ensure that the difference is less than 12 hours in either direction.
         while difference >= twelve_hours:
             logger.error(f"Clock {self.name.name} Difference: {difference}")
@@ -82,7 +84,7 @@ class Clock:
         while difference <= -twelve_hours:
             logger.error(f"Clock {self.name.name} Difference: {difference}")
             difference += twelve_hours
-        
+
         # 2. Make the difference positive. Pulse multi-hour rather than wait.
         if difference < 0:
             difference += twelve_hours
@@ -91,7 +93,7 @@ class Clock:
         if (twelve_hours - self.cutoff) <= difference < twelve_hours:
             difference -= twelve_hours
 
-        # 4. If the difference is equal to twelve hours, set it to 0. 
+        # 4. If the difference is equal to twelve hours, set it to 0.
         if difference == twelve_hours:
             difference = 0
 

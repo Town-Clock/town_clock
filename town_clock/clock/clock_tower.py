@@ -22,7 +22,7 @@ class Relay(Protocol):
     """
     Relay Protocol
     """
-    
+
     lights_on: bool
 
     def turn_on(self) -> Relay:
@@ -60,26 +60,26 @@ class ClockTower:
         clock_times = self.get_time_from_file()
         for clock in self.clock.values():
             clock.time_on_clock = clock_times[clock.name.value - 1]
-        logger.log('INFO', self.print_clocks())
-    
+        logger.log("INFO", self.print_clocks())
+
     def print_clocks(self) -> str:
-        return f'Clock 1: {self.clock[ONE].time_on_clock}, Clock 2: {self.clock[TWO].time_on_clock}'
-        
+        return f"Clock 1: {self.clock[ONE].time_on_clock}, Clock 2: {self.clock[TWO].time_on_clock}"
+
     def get_time_from_file(self) -> list[int]:
         clock_time = self.time.clock_time
         ret_tm: list[int] = [clock_time, clock_time]
-        
-        try: 
+
+        try:
             with open(file_name, "r") as f:
                 last_lines = f.readlines()[-3:]
         except FileNotFoundError:
             with open(file_name, "w"):
                 ...
             return ret_tm
-                
+
         for line in last_lines[::-1]:
             try:
-                ret_tm = [int(time) for time in line.split(',')[3:5]]
+                ret_tm = [int(time) for time in line.split(",")[3:5]]
                 break
             except KeyError:
                 continue
@@ -95,10 +95,7 @@ class ClockTower:
             Pulses: How many pulses required to bring the clock back to
                     current time.
         """
-        return Pulses(
-            one=self.clock[ONE].slow,
-            two=self.clock[TWO].slow
-            )
+        return Pulses(one=self.clock[ONE].slow, two=self.clock[TWO].slow)
 
     def pulse_clocks(self) -> None:
         """
@@ -152,7 +149,8 @@ class ClockTower:
                 self.pulse_clocks()
                 self.led.lights_on = self.is_night
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     ...
     # tower = ClockTower(
     #     True,

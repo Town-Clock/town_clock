@@ -25,10 +25,10 @@ class Buttons:
     """
 
     def __init__(
-        self, 
-        button_pins: dict[str, int], 
-        button_names = ["up", "down", "left", "right", "select"]
-        ) -> None:
+        self,
+        button_pins: dict[str, int],
+        button_names=["up", "down", "left", "right", "select"],
+    ) -> None:
         """Class for controlling the button interface from user.
 
         Default button names:
@@ -76,11 +76,14 @@ class Buttons:
 
     def __repr__(self) -> str:
         ret_str = (
-            "Buttons(button_pins={" + 
-            ', '.join(str(key + ': ' + str(value)) for 
-            key, value in self.__dict__.items()
-            if key in self.button_names) + "})"
+            "Buttons(button_pins={"
+            + ", ".join(
+                str(key + ": " + str(value))
+                for key, value in self.__dict__.items()
+                if key in self.button_names
             )
+            + "})"
+        )
         return ret_str
 
     def button_value(self, button: str) -> bool:
@@ -108,13 +111,15 @@ class Buttons:
 
 if __name__ == "__main__":
     print(
-        repr(Buttons(
-            {
-                "up": 5,
-                "down": 6,
-                "left": 7,
-                "right": 8,
-                "select": 9,
-            }
-        ))
+        repr(
+            Buttons(
+                {
+                    "up": 5,
+                    "down": 6,
+                    "left": 7,
+                    "right": 8,
+                    "select": 9,
+                }
+            )
+        )
     )

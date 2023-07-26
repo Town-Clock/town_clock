@@ -41,10 +41,10 @@ pulse_handler = TimedRotatingFileHandler(
 
 logger.add(
     pulse_handler,
-    format=f'{{time}},{{message}}', # Todo: Add csv formating. 
+    format=f"{{time}},{{message}}",  # Todo: Add csv formating.
     level="PULSE",
     colorize=False,
-    filter= (lambda record : record["level"].name == "PULSE"),
+    filter=(lambda record: record["level"].name == "PULSE"),
     serialize=False,
 )
 
@@ -64,6 +64,6 @@ logger.add(
     everything_handler,
     level=loglevel,
     colorize=False,
-    filter= (lambda record : record["level"].name != "PULSE"),
+    filter=(lambda record: record["level"].name != "PULSE"),
     serialize=False,
 )

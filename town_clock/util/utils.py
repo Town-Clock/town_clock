@@ -1,7 +1,8 @@
 from enum import Enum
 from typing import Literal
 
-SYDNEY = {'latitude': -33.86785,'longitude': 151.20732,'altitude': 0}
+SYDNEY = {"latitude": -33.86785, "longitude": 151.20732, "altitude": 0}
+
 
 class Log_Level(Enum):
     """Log Levels:
@@ -40,7 +41,7 @@ class Mode(Enum):
 class CLOCK(Enum):
     """CLOCK Names
     A enum used for controlling and altering the clock times independently.
-        """
+    """
 
     ALL = 0
     ONE = 1

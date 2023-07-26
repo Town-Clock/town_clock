@@ -22,11 +22,12 @@ from pathlib import Path
 
 file_name = clock_logging.pulse_handler_file
 
+
 @dataclass
 class Time:
     """
     Controls the time logic.
-    
+
     now: pendulum.DateTime:
     clock_time: int: minutes from 12 AM/PM
     timezone: Timezone | str: Timezone of the clock. Default is "Australia/Sydney".
@@ -56,8 +57,8 @@ class Time:
 
     def __iter__(self):
         """WHY??
-        
-        TODO: Remove if unnessary. 
+
+        TODO: Remove if unnessary.
 
         Returns:
             NotImplemented: Not Implemented
@@ -66,23 +67,22 @@ class Time:
 
     def get_time_from_file(self) -> DateTime:
         ret_dt = pendulum.now()
-        try: 
+        try:
             with open(file_name, "r") as f:
                 last_lines = f.readlines()[-3:]
         except FileNotFoundError:
             with open(file_name, "w"):
                 ...
             return ret_dt
-                
+
         for line in last_lines[::-1]:
             try:
-                line_list = line.split(',')
+                line_list = line.split(",")
                 self.clock_time = int(line_list[2])
                 break
             except KeyError:
                 continue
         return ret_dt
-        
 
     def set_clock_time(self, tm: int | DateTime) -> Time:
         """
@@ -102,27 +102,29 @@ class Time:
         elif isinstance(tm, DateTime):
             dt = tm
         else:
-            raise TypeError(f"Must be of type int or DateTime. Recieved type: {type(tm)}")
-        
+            raise TypeError(
+                f"Must be of type int or DateTime. Recieved type: {type(tm)}"
+            )
+
         self.clock_time = (dt.hour % 12) * 60 + dt.minute
 
         return self
 
     def __call__(self, time: Optional[DateTime] = None) -> bool:
         """
-        Check if the time is on the minute. If on the minute updates the clock_time. 
-        If a time is passed in, it will set the clock_time to that time and returns true. 
+        Check if the time is on the minute. If on the minute updates the clock_time.
+        If a time is passed in, it will set the clock_time to that time and returns true.
 
         Returns:
             Bool: Returns True if on the minute.
         """
         changed_clock_time: bool = False
-        
+
         if time is None:
             self.now = pendulum.now(self.timezone)
             if changed_clock_time := self.is_on_minute(self.now):
                 self.set_clock_time(self.now)
-            
+
         elif isinstance(time, DateTime):
             self.now = time
             self.set_clock_time(time)
@@ -130,7 +132,7 @@ class Time:
 
         else:
             raise TypeError(f"Unexpected type for time: {type(time).__name__}")
-        
+
         return changed_clock_time
 
     def is_on_minute(self, time: DateTime) -> bool:
@@ -149,7 +151,7 @@ class Time:
         """Adds x minutes
 
         Todo: Why does this exist with self.now, should it be to clock_time? For testing?
-        
+
         Args:
             minute (int, optional): Number of minutes to add. Defaults to 1.
 
@@ -161,10 +163,10 @@ class Time:
 
     def set_sunrise_sunset(self) -> Time:
         """Sets the Sunrise and Sunset times.
-        
+
         Sets:
             - prev_sunrise
-            - sunset            
+            - sunset
             - next_sunrise
 
         Returns:
@@ -179,27 +181,26 @@ class Time:
     @property
     def is_night(self) -> bool:
         """Is it nighttime?
-        
+
         Returns:
             bool: True if nightime."""
         now = self.now.timestamp()
-        
+
         if now < self.prev_sunrise or now > self.next_sunrise:
             self.set_sunrise_sunset()
-        
+
         if self.sunset < now < self.next_sunrise:
             return True
         return False
-        
 
-    def log_time(self, lvl: int | str, msg: str): # -> str:
+    def log_time(self, lvl: int | str, msg: str):  # -> str:
         logger.log(lvl, msg)
 
-if __name__ == '__main__':
-    position = { 'latitude': -33.86785,'longitude': 151.20732,'altitude': 0 }
-    dt = pendulum.datetime(2023,7,27,6,26,tz="Australia/Sydney")
+
+if __name__ == "__main__":
+    position = {"latitude": -33.86785, "longitude": 151.20732, "altitude": 0}
+    dt = pendulum.datetime(2023, 7, 27, 6, 26, tz="Australia/Sydney")
     t = Time(position)
     # t(dt)
     # print(Time(position).is_night)
-    t.log_time('PULSE',f'{int(t.now.timestamp())},{t.clock_time},385,381')
-    
+    t.log_time("PULSE", f"{int(t.now.timestamp())},{t.clock_time},385,381")
