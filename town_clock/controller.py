@@ -48,7 +48,6 @@ class Controller:
         self.time = Time()
         self.tower = Tower()
 
-
     def run(self) -> None:
         """
         Run the clock computer.
