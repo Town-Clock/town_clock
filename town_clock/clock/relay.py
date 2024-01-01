@@ -4,64 +4,101 @@ relay.py
 todo: better error handling
 """
 from __future__ import annotations
+from enum import Enum
 import time
+from typing import Self
+from town_clock.settings import RELAY_PULSE_DELAY
 
 from town_clock.util import Mode, CLOCK
 from town_clock.util.clock_exceptions import PulseError
+from town_clock.util.utils import get_mode_from_env
+
+
+class RelayState(Enum):
+    """Relay State"""
+
+    ON = 1
+    OFF = 0
 
 
 class Relay:
     """
     Class for relay.
-    todo:
-        remember to order of pulses. Alternating between common and clock pin.
     """
 
-    def __init__(self, pin: int, name: str, mode: Mode = Mode.TEST) -> None:
-        self.is_on: bool = False
-        self.mode = mode
+    def __init__(self, pin: int, name: str) -> None:
+        """
+        Initialize a Relay object.
+
+        Args:
+            pin (int): The pin number to which the relay is connected.
+            name (str): The name of the relay.
+            mode (Mode, optional): The mode of the relay. Defaults to Mode.TEST.
+        """
+        self.state: RelayState = RelayState.OFF
+        self.mode = get_mode_from_env()
         self.pin = pin
         self.name = name
 
+    @property
+    def is_on(self) -> bool:
+        """
+        Check if the relay is currently turned on.
+
+        Returns:
+            bool: True if the relay is on, False otherwise.
+        """
+        return self.state == RelayState.ON
+
     def turn_on(self) -> None:
-        self.is_on = True
+        """
+        Turns on the relay.
+
+        This method sets the state of the relay to 'ON'.
+
+        Todo:
+            - Control the relay using the GPIO library.
+        """
+        self.state = RelayState.ON
 
     def turn_off(self) -> None:
-        self.is_on = False
+        """
+        Turns off the relay.
+
+        This method sets the state of the relay to OFF.
+
+        Todo:
+            - Control the relay using the GPIO library.
+        """
+        self.state = RelayState.OFF
 
 
 class ClockRelay(Relay):
     """Clock Relay Class"""
 
-    def __init__(self, common_pin: int, clock: CLOCK, *args, **kwargs) -> None:
-        """
-        Init Clock Relay
-
-        args:
-            common_pin: int
-            clock: CLOCK
-            pin: int
-            name: str
-            mode: Mode = Mode.TEST
-        """
+    def __init__(self, clock: CLOCK, common_pin: int, pin: int, name: str) -> None:
+        super().__init__(pin, name)
         self.common_pin = common_pin
         self.clock: CLOCK = clock
-        super().__init__(*args, **kwargs)
 
-    def pulse(self) -> bool:
+    def pulse(self) -> Self:
         """
-        Pulse the relay.
+        Pulse the relay by turning it on for a short duration and then turning it off.
+
+        Returns:
+            Self: The current instance of the Relay class.
+
+        Raises:
+            PulseError: If the pulse operation fails.
         """
         try:
             self.turn_on()
-            time.sleep(0.1)
+            time.sleep(RELAY_PULSE_DELAY)
             self.turn_off()
-            return True
+            return self
         except Exception:
             raise PulseError(False, f"Failed to pulse: {self.name}")
 
 
 class LEDRelay(Relay):
     """LED Relay"""
-
-    ...

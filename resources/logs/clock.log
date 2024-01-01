@@ -1,0 +1,124 @@
+2023-07-26 19:04:54.204 | INFO     | __main__:__post_init__:56 - Time Object initialised at None.
+2023-07-26 19:04:54.205 | DEBUG    | __main__:__post_init__:57 - Timezone: Australia/Sydney
+2023-07-26 19:04:54.551 | INFO     | __main__:log_time:188 - Night: False
+2023-07-26 19:31:37.818 | INFO     | __main__:__post_init__:56 - Time Object initialised at None.
+2023-07-26 19:31:37.818 | DEBUG    | __main__:__post_init__:57 - Timezone: Australia/Sydney
+2023-07-26 19:34:00.434 | INFO     | __main__:__post_init__:56 - Time Object initialised at None.
+2023-07-26 19:34:00.434 | DEBUG    | __main__:__post_init__:57 - Timezone: Australia/Sydney
+2023-07-26 20:08:21.249 | INFO     | __main__:__post_init__:56 - Time Object initialised at 2023-07-26T20:08:21.249478+10:00.
+2023-07-26 20:08:21.249 | DEBUG    | __main__:__post_init__:57 - Timezone: Australia/Sydney
+2023-07-26 20:08:53.765 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:08:53.765468+10:00.
+2023-07-26 20:08:53.765 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:09:20.102 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:09:20.101930+10:00.
+2023-07-26 20:09:20.102 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:09:25.498 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:09:25.498673+10:00.
+2023-07-26 20:09:25.499 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:10:37.812 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:10:37.812704+10:00.
+2023-07-26 20:10:37.813 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:10:51.341 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:10:51.341766+10:00.
+2023-07-26 20:10:51.342 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:12:06.941 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:12:06.941190+10:00.
+2023-07-26 20:12:06.941 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:13:36.494 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:13:36.494306+10:00.
+2023-07-26 20:13:36.494 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:15:09.433 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:15:09.433430+10:00.
+2023-07-26 20:15:09.433 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:15:19.745 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:15:19.745236+10:00.
+2023-07-26 20:15:19.745 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:15:44.463 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:15:44.463226+10:00.
+2023-07-26 20:15:44.463 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:15:54.707 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:15:54.706984+10:00.
+2023-07-26 20:15:54.707 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:16:25.129 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:16:25.129391+10:00.
+2023-07-26 20:16:25.129 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:17:08.101 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:17:08.101790+10:00.
+2023-07-26 20:17:08.102 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:17:29.713 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:17:29.713673+10:00.
+2023-07-26 20:17:29.713 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:18:53.491 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:18:53.491237+10:00.
+2023-07-26 20:18:53.491 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:22:21.883 | INFO     | __main__:__post_init__:55 - Time Object initialised at 1690366733.
+2023-07-26 20:22:21.883 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:22:52.684 | INFO     | __main__:__post_init__:55 - Time Object initialised at 1690366733.
+2023-07-26 20:22:52.685 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:24:15.988 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:24:15.988202+10:00.
+2023-07-26 20:24:15.988 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:24:35.003 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:24:35.003390+10:00.
+2023-07-26 20:24:35.003 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:24:35.966 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:24:35.966857+10:00.
+2023-07-26 20:24:35.967 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:24:37.110 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:24:37.110183+10:00.
+2023-07-26 20:24:37.110 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:24:38.018 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:24:38.018158+10:00.
+2023-07-26 20:24:38.018 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:24:39.257 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:24:39.257251+10:00.
+2023-07-26 20:24:39.257 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:26:31.758 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:26:31.758466+10:00.
+2023-07-26 20:26:31.758 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:26:55.534 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:26:55.534104+10:00.
+2023-07-26 20:26:55.534 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:27:31.589 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:27:31.589813+10:00.
+2023-07-26 20:27:31.590 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:27:47.088 | INFO     | __main__:__post_init__:55 - Time Object initialised at 2023-07-26T20:27:47.088520+10:00.
+2023-07-26 20:27:47.088 | DEBUG    | __main__:__post_init__:56 - Timezone: Australia/Sydney
+2023-07-26 20:29:20.062 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:29:20.062880+10:00.
+2023-07-26 20:29:20.063 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:32:13.179 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:32:01.526553+10:00.
+2023-07-26 20:32:17.587 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:32:36.784 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:32:36.784653+10:00.
+2023-07-26 20:32:36.784 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:32:39.574 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:32:39.574893+10:00.
+2023-07-26 20:32:39.575 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:32:40.346 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:32:40.346249+10:00.
+2023-07-26 20:32:40.346 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:32:40.978 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:32:40.978535+10:00.
+2023-07-26 20:32:40.978 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:32:41.554 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:32:41.554436+10:00.
+2023-07-26 20:32:41.554 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:09.282 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:09.282860+10:00.
+2023-07-26 20:33:09.283 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:10.069 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:10.069866+10:00.
+2023-07-26 20:33:10.070 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:10.838 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:10.838161+10:00.
+2023-07-26 20:33:10.838 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:11.487 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:11.487049+10:00.
+2023-07-26 20:33:11.487 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:12.170 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:12.170517+10:00.
+2023-07-26 20:33:12.171 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:12.900 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:12.899951+10:00.
+2023-07-26 20:33:12.900 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:13.805 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:13.805764+10:00.
+2023-07-26 20:33:13.806 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:14.520 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:14.520246+10:00.
+2023-07-26 20:33:14.520 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:33:15.177 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:33:15.177832+10:00.
+2023-07-26 20:33:15.178 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:35:31.651 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:35:31.651879+10:00.
+2023-07-26 20:35:31.652 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:39:23.494 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:39:23.494478+10:00.
+2023-07-26 20:39:23.494 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:39:54.523 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:39:54.523771+10:00.
+2023-07-26 20:39:54.524 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 20:40:15.019 | INFO     | __main__:__post_init__:54 - Time Object initialised at 2023-07-26T20:40:15.019213+10:00.
+2023-07-26 20:40:15.019 | DEBUG    | __main__:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:06:17.908 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:06:17.908387+10:00.
+2023-07-26 21:06:17.908 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:06:34.710 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:06:34.710796+10:00.
+2023-07-26 21:06:34.711 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:07:05.396 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:07:05.396743+10:00.
+2023-07-26 21:07:05.397 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:07:50.842 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:07:50.842477+10:00.
+2023-07-26 21:07:50.842 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:08:08.442 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:08:08.442566+10:00.
+2023-07-26 21:08:08.442 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:08:42.816 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:08:42.815924+10:00.
+2023-07-26 21:08:42.816 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:08:54.151 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:08:54.151894+10:00.
+2023-07-26 21:08:54.152 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:09:14.745 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:09:14.745005+10:00.
+2023-07-26 21:09:14.745 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:10:08.981 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:10:08.981720+10:00.
+2023-07-26 21:10:08.982 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:12:37.607 | INFO     | town_clock.clock._time:__post_init__:54 - Time Object initialised at 2023-07-26T21:12:37.607072+10:00.
+2023-07-26 21:12:37.607 | DEBUG    | town_clock.clock._time:__post_init__:55 - Timezone: Australia/Sydney
+2023-07-26 21:12:37.607 | INFO     | __main__:__post_init__:70 - Clock 1: 385, Clock 2: 381
