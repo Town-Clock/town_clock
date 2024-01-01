@@ -5,7 +5,9 @@ Author: Zack Hankin
 Started: 20/02/2023
 """
 from __future__ import annotations
-from typing import Sequence
+from typing import Self, Sequence
+
+# from town_clock.util.number_to_names import number_to_name
 
 
 class GreaterThanZero:
@@ -35,15 +37,59 @@ class GreaterThanZero:
         setattr(instance, self.name, value)
 
 
+# class SuperPulses:
+#     """Object to control the Pulse amount"""
+
+#     # __slots__ = ["keys"]
+
+#     def __new__(cls, *args, **kwargs):
+#         dict_ = {
+#             str(number_to_name(idx + 1, "-", False, "")): int(x)
+#             for idx, x in enumerate(args)
+#         }
+
+#         cls.__slots__ = ["_" + str(x) for x in dict_.keys()]
+#         cls.__slots__ += [str(x) for x in dict_.keys()]
+
+#         self = super().__new__(cls)
+
+#         for key, value in dict_.items():
+#             self.__setattr__(key, GreaterThanZero())
+#         for key, value in dict_.items():
+#             self.__setattr__(key, value)
+#         # property(, "one")
+#         # self.__dict__ = dict_
+#         return self
+
+#     def __init__(self, *args, **kwargs) -> None:
+#         print("init: ", kwargs)
+
+#     def __eq__(self, o: object) -> bool:
+#         """
+#         Pulses equality works with both Pulses or Sequences.
+
+#         Args:
+#             o (Pulses | Sequence): Pulses or Sequence to compare.
+
+#         Returns:
+#             bool: True if equal.
+#         """
+#         return NotImplemented
+
+#     def __repr__(self) -> str:
+#         return f"Pulses({', '.join([str(x) for x in self.__dict__.values()])})"
+
+
 class Pulses:
     """Object to control the Pulse amount"""
 
-    __slots__ = ["_one", "_two"]
+    __slots__ = ["_one", "_two", "keys"]
 
-    one = GreaterThanZero()
-    two = GreaterThanZero()
+    one: GreaterThanZero = GreaterThanZero()
+    two: GreaterThanZero = GreaterThanZero()
 
     def __init__(self, one: int = 0, two: int = 0) -> None:
+        self.keys = [x[1:] for x in self.__slots__ if x.startswith("_")]
         self.one = one
         self.two = two
 

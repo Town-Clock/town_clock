@@ -21,6 +21,7 @@ pendulum = "^2.1.2"
 sphinx = { version = "^5", optional = true }
 myst-parser = { version = "^0.18.1", optional = true }
 sphinx-rtd-theme = { version = "^1", optional = true }
+inflect = "^7.0.0"
 
 [tool.poetry.group.dev]
 optional = true
@@ -35,6 +36,7 @@ types-pytz = "^2022.7.1.0"
 types-cffi = "^1.15.1.5"
 flake8 = "^6.0.0"
 tox = "^4.4.5"
+isort = "^5.13.2"
 
 [tool.poetry.extras]
 docs = ['sphinx', 'myst-parser', 'sphinx-rtd-theme']

@@ -1,4 +1,5 @@
 from enum import Enum
+import os
 from typing import Literal
 
 
@@ -34,6 +35,16 @@ class Mode(Enum):
     DEV = "dev"
     TEST = "test"
     ACTIVE = "active"
+
+
+def get_mode_from_env() -> Mode:
+    """
+    Get the mode from the environment.
+
+    Returns:
+        Mode: The mode of the clock.
+    """
+    return Mode(os.environ.get("CLOCK_MODE", Mode.DEV))
 
 
 class CLOCK(Enum):

@@ -6,7 +6,7 @@ from __future__ import annotations
 import pytest
 from icecream import ic
 
-from town_clock import Clock, ClockTower, Time
+from town_clock import Clock, Tower, Time
 from town_clock.util import CLOCK, Mode
 
 
@@ -53,8 +53,8 @@ def mock_clock_dict() -> dict[CLOCK, Clock]:
 
 
 @pytest.fixture
-def default_town_clock(mock_clock_dict) -> ClockTower:
-    return ClockTower(
+def default_town_clock(mock_clock_dict) -> Tower:
+    return Tower(
         running=True,
         time=MOCK_TIME,
         mode=Mode.TEST,
@@ -65,8 +65,8 @@ def default_town_clock(mock_clock_dict) -> ClockTower:
     )
 
 
-def test_clock_tower_instantiation(default_town_clock: ClockTower) -> None:
-    assert isinstance(default_town_clock, ClockTower)
+def test_clock_tower_instantiation(default_town_clock: Tower) -> None:
+    assert isinstance(default_town_clock, Tower)
 
 
 @pytest.mark.parametrize(
@@ -77,7 +77,7 @@ def test_clock_tower_slow_property(
     c1: int,
     c2: int,
     expected,
-    default_town_clock: ClockTower,
+    default_town_clock: Tower,
 ) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2
@@ -96,7 +96,7 @@ def test_clock_tower_pulse(
     c1,
     c2,
     expected,
-    default_town_clock: ClockTower,
+    default_town_clock: Tower,
 ) -> None:
     default_town_clock.clock[ONE].slow = c1
     default_town_clock.clock[TWO].slow = c2

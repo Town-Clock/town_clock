@@ -1,13 +1,13 @@
-"""
-Todo:
-    Add asyncio.
-"""
 from __future__ import annotations
+
 import os
 import sys
 import time
 
+from town_clock import settings
+from town_clock.clock import Tower, Time, Clock
 from town_clock.util import Mode
+from town_clock.util.utils import convert_position_string_to_number, get_mode_from_env
 
 
 class Controller:
@@ -30,22 +30,23 @@ class Controller:
         clock_pins: tuple[int, int],
         led_pin: int,
         common_pin: int,
-        lat: float,
-        long: float,
+        lat: str,
+        long: str,
         alt: float,
-        mode: Mode = Mode.DEV,
     ) -> None:
         self.pins = {
             "common_pin": common_pin,
             "clock_pins": clock_pins,
             "led_pin": led_pin,
         }
-        self.mode: Mode = mode
+        self.mode: Mode = get_mode_from_env()
         self.position: dict[str, float] = {
-            "latitude": lat,
-            "longitude": long,
+            "latitude": convert_position_string_to_number(lat),
+            "longitude": convert_position_string_to_number(long),
             "altitude": alt,
         }
+        self.time = Time()
+        self.tower = Tower()
 
     def run(self) -> None:
         """
@@ -66,7 +67,7 @@ class Controller:
         """
 
         print("\nbye....")
-        sys.exit(0)
+        raise SystemExit(0)
 
     def restart(
         self,
