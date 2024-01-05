@@ -1,4 +1,6 @@
 from datetime import datetime
+from enum import Enum
+from .utils import Position
 
 class TimezoneFinder:
     def timezone_at(self, *, lng: float, lat: float) -> str: ...
@@ -6,9 +8,7 @@ class TimezoneFinder:
 def timezone_finder(
     latitude: float, longitude: float
 ) -> _UTCclass | StaticTzInfo | DstTzInfo: ...
-def find_sunrise_sunset_times(
-    latitude: float, longitude: float, altitude: float
-) -> dict[int, float]: ...
+def find_sunrise_sunset_times(position: Position) -> dict[TimeOfDay, float]: ...
 
 class TzInfo:
     def localize(self, dt: datetime) -> datetime: ...
@@ -17,3 +17,9 @@ class TzInfo:
 class _UTCclass(TzInfo): ...
 class StaticTzInfo(TzInfo): ...
 class DstTzInfo(TzInfo): ...
+
+class TimeOfDay(Enum):
+    FIRSTLIGHT: int
+    SUNRISE: int
+    SUNSET: int
+    LASTLIGHT: int

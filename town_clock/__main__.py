@@ -12,6 +12,7 @@ import tomli
 
 from town_clock.controller import Controller
 from town_clock.util import convert_position_string_to_number, Mode
+from .util import Position
 
 file = Path(__file__, "../../config/config.toml").resolve()
 
@@ -26,6 +27,8 @@ altitude = CONFIG_LOCATION["altitude"]
 latitude = convert_position_string_to_number(latitude)
 longitude = convert_position_string_to_number(longitude)
 
+position = Position(latitude=latitude, longitude=longitude, altitude=altitude)
+
 clock_pins = config["Pins"]["clock_pins"]
 led_pin = config["Pins"]["led_pin"]
 common_pin = config["Pins"]["common_pin"]
@@ -35,9 +38,7 @@ CONTROLLER = Controller(
     clock_pins=clock_pins,
     led_pin=led_pin,
     common_pin=common_pin,
-    lat=latitude,
-    long=longitude,
-    alt=altitude,
+    position=position,
     mode=mode,
 )
 
