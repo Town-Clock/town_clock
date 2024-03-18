@@ -1,6 +1,7 @@
 """
 ClockTower module.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -23,11 +24,9 @@ class LEDRelay(Protocol):
     :NoIndex:
     """
 
-    def turn_on(self) -> LEDRelay:
-        ...
+    def turn_on(self) -> LEDRelay: ...
 
-    def turn_off(self) -> LEDRelay:
-        ...
+    def turn_off(self) -> LEDRelay: ...
 
 
 @dataclass(slots=True)

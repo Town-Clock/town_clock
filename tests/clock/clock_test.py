@@ -2,6 +2,7 @@
 test clock.py
 
 """
+
 import pytest
 
 from town_clock.clock import Clock
