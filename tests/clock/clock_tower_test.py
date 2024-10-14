@@ -1,6 +1,7 @@
 """
 Test clock_tower.py
 """
+
 from __future__ import annotations
 
 import pytest
@@ -11,11 +12,9 @@ from town_clock.util import CLOCK, Mode
 
 
 class MOCK_LEDRELAY:
-    def turn_on(self):
-        ...
+    def turn_on(self): ...
 
-    def turn_off(self):
-        ...
+    def turn_off(self): ...
 
 
 class MOCK_ClockRelay:
