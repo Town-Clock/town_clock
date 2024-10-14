@@ -5,6 +5,7 @@ Author: Zack Hankin
 email: zthankin@gmail.com
 Version: 1.0.2
 """
+
 from town_clock.clock import (
     Clock,
     ClockRelay,

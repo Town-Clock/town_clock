@@ -7,6 +7,7 @@ Configuration for pytest suite.
 Author: Zack Hankin
 Started: 10/02/2023
 """
+
 from __future__ import annotations
 
 from _pytest.logging import LogCaptureFixture
