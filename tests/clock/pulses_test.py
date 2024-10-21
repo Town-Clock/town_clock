@@ -6,6 +6,7 @@ pulses_test.py
 Author: Zack Hankin
 Started: 21/02/2023
 """
+
 from __future__ import annotations
 import pytest
 from town_clock.clock import Pulses

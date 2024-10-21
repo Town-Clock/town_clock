@@ -5,6 +5,7 @@ Author: Zack Hankin
 Email: zthankin@gmail.com
 Version: 1.0.2
 """
+
 import sys
 from pathlib import Path
 

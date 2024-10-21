@@ -2,6 +2,7 @@
 test init.py
 
 """
+
 from loguru import logger
 
 try:
