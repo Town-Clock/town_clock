@@ -6,6 +6,7 @@ exceptions.py
 Author: Zack Hankin
 Started: 10/02/2023
 """
+
 from __future__ import annotations
 
 from loguru import logger
@@ -45,5 +46,4 @@ class PulseError(BaseClockException):
         return repr(self)
 
 
-class NoValidTimeFromFileError(BaseClockException):
-    ...
+class NoValidTimeFromFileError(BaseClockException): ...
