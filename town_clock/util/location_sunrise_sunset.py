@@ -1,6 +1,7 @@
 """
 Calculates sun position.
 """
+
 import time
 from datetime import timedelta, datetime
 
