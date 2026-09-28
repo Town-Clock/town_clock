@@ -3,6 +3,7 @@ relay.py
 
 todo: better error handling
 """
+
 import time
 
 from town_clock.util import Mode
@@ -29,8 +30,6 @@ class Relay:
         except Exception:
             return False
 
-    def turn_on(self) -> None:
-        ...
+    def turn_on(self) -> None: ...
 
-    def turn_off(self) -> None:
-        ...
+    def turn_off(self) -> None: ...
