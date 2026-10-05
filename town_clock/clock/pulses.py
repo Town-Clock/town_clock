@@ -4,6 +4,7 @@ Pulses Class and functionality.
 Author: Zack Hankin
 Started: 20/02/2023
 """
+
 from __future__ import annotations
 from typing import Sequence
 
